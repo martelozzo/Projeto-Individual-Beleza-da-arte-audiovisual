@@ -2,9 +2,14 @@
 
     margin: 0;
     padding: 0;
-    background-color: rgb(220, 214, 206);
+    
     
 
+}
+
+body {
+
+    background-color: rgb(220, 214, 206);
 }
 
 @keyframes fadeIn {
@@ -19,7 +24,7 @@
     border-bottom: 1px solid black;
     background-color: rgb(220, 214, 206);
     padding: 10px;
-    justify-content: space-around;
+    justify-content: space-between;
     
 }
 
@@ -35,6 +40,7 @@
 .login {
 
     justify-content: flex-end;
+    
     border: 0px solid black;
     width: 20%;
     gap: 10%;
@@ -43,9 +49,10 @@
 
 .login button{
 
-    width: 40%;
+    width: fit-content;
     height: 95%;
-    
+    padding: 1rem;
+
     box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.5);
     background-color: black;
     
@@ -122,6 +129,7 @@
 
     flex-direction: row;
     
+    
 }
 
 .img_texto img{
@@ -147,5 +155,34 @@
     background-color: black;
     font-weight: 500;
     font-size: 15px;
+
+}
+
+.container_login {
+
+    width: 50hv;
+    height: 30vh;
+    background-color: rgb(202, 186, 146);
+    border-radius: 15px;
+
+}
+
+.footer {
+    background-color: #000000; 
+    color:  rgb(220, 214, 206); 
+    text-align: center; 
+    padding: 20px 0; 
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    margin-top: auto; 
+}
+
+.footer_lines {
+
+    border-bottom: 1px solid rgb(220, 214, 206);
+    border-top: 1px solid rgb(220, 214, 206);
+    width: 90%;
+    justify-self: center;
 
 }
