@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exemplo - Quiz</title>
+  <link rel="stylesheet" href="all_style.css">
+</head>
+
+
+<body onload="onloadEsconder()">
+  <header class="header">
+
+    <div class="header_title inter" style="font-size: 2.6rem;" onclick="window.location.href='index.html'" 3>A beleza e
+      a importância da
+      arte audiovisual</div>
+    <div class="login inter"><button onclick="window.location.href='login.html'">
+        <p>Login</p>
+      </button></div>
+  </header>
+  <div id="pontuacaoEJogo" style="display: flex; height: 100%; width: 100%;">
+    <button id="btnIniciarQuiz" onclick="iniciarQuiz()" class="botao"
+      style="display:flex; justify-content: center; align-items: center;">
+      <p>INICIAR QUIZ</p>
+    </button>
+
+    <div id="jogo" class="questao inter">
+
+      <div id="infoQuestao" class="padding-8" style="display: flex; align-self: flex-start; padding-left: 3rem;">
+        <h3>Questão atual: <span id="spanNumeroDaQuestaoAtual"></span> de <span id="qtdQuestoes"></span>
+          questões.</h3>
+      </div>
+
+      <div id="perguntaDaQuestaoAtual" class="padding-8" style="padding-top: 2rem;">
+        <span id="spanQuestaoExibida" class="text-bold"></span>
+      </div>
+
+      <div id="infoAlternativas" class="padding-8">
+        <span><em>Escolha uma opção dentre as abaixo:</em></span>
+      </div>
+
+      <div id="opcoes" class="flex-colunar padding-8" style="padding-top: 3rem;">
+        <span>
+          <input type="radio" id="primeiraOpcao" name="option" class="radio" value="alternativaA" />
+          <label for="primeiraOpcao" class="option" id="labelOpcaoUm"></label>
+        </span>
+        <span>
+          <input type="radio" id="segundaOpcao" name="option" class="radio" value="alternativaB" />
+          <label for="segundaOpcao" class="option" id="labelOpcaoDois"></label>
+        </span>
+        <span>
+          <input type="radio" id="terceiraOpcao" name="option" class="radio" value="alternativaC" />
+          <label for="terceiraOpcao" class="option" id="labelOpcaoTres"></label>
+        </span>
+        <span>
+          <input type="radio" id="quartaOpcao" name="option" class="radio" value="alternativaD" />
+          <label for="quartaOpcao" class="option" id="labelOpcaoQuatro"></label>
+        </span>
+      </div>
+
+      <div id="botoes" class="flex-colunar padding-8">
+        <button onclick="submeter()" id="btnSubmeter">Submeter resposta</button>
+        <button onclick="voltar()" id="btnAnterior" disabled>Voltar para questão anterior</button>
+        <button onclick="avancar()" id="btnProx" disabled>Avançar para próxima questão</button>
+        <button onclick="tentarNovamente()" id="btnTentarNovamente" disabled>Tentar novamente</button>
+      </div>
+
+    </div>
+  </div>
+</body>
+
+</html>
+<script>
+  const listaDeQuestoes = [
+
+    {
+      pergunta: "Qual seu formato de ilustração favorito?",
+      alternativaA: "Tradicional/Lápis",
+      alternativaB: "Pintura Realista",
+      alternativaC: "Digital",
+      alternativaD: "outro",
+      imagemA: "",
+      imagemB: "",
+      imagemC: "",
+      imagemD: "",
+    },
+
+    {
+      pergunta: "Quantas horas tem em um dia?",
+      alternativaA: "30 horas",
+      alternativaB: "38 horas",
+      alternativaC: "48 horas",
+      alternativaD: "24 horas",
+      imagemA: "",
+      imagemB: "",
+      imagemC: "",
+      imagemD: "",
+    },
+
+    {
+      pergunta: "Qual destes números é ímpar?",
+      alternativaA: "Dez",
+      alternativaB: "Doze",
+      alternativaC: "Oito",
+      alternativaD: "Onze",
+      imagemA: "",
+      imagemB: "",
+      imagemC: "",
+      imagemD: "",
+    }
+
+  ]
+
+  // variáveis globais
+  let numeroDaQuestaoAtual = 0
+  let quantidadeDeQuestoes = listaDeQuestoes.length
+  let respostas = new Array(quantidadeDeQuestoes).fill(null)
+
+  function onloadEsconder() {
+    document.getElementById('jogo').style.display = "none"
+  }
+
+  function iniciarQuiz() {
+    document.getElementById('jogo').style.display = "flex"
+    document.getElementById('btnIniciarQuiz').style.display = "none"
+
+    document.getElementById('qtdQuestoes').innerHTML = quantidadeDeQuestoes
+
+    preencherHTMLcomQuestaoAtual(0)
+
+    btnSubmeter.disabled = false
+    btnAnterior.disabled = true
+    btnProx.disabled = true
+    btnTentarNovamente.disabled = true
+  }
+
+  function preencherHTMLcomQuestaoAtual(index) {
+    habilitarAlternativas(true)
+    const questaoAtual = listaDeQuestoes[index]
+    numeroDaQuestaoAtual = index
+    document.getElementById("spanNumeroDaQuestaoAtual").innerHTML = Number(index) + 1
+    document.getElementById("spanQuestaoExibida").innerHTML = questaoAtual.pergunta;
+    document.getElementById("labelOpcaoUm").innerHTML = buildLabelHTML(questaoAtual.alternativaA, questaoAtual.imagemA);
+    document.getElementById("labelOpcaoDois").innerHTML = buildLabelHTML(questaoAtual.alternativaB, questaoAtual.imagemB);
+    document.getElementById("labelOpcaoTres").innerHTML = buildLabelHTML(questaoAtual.alternativaC, questaoAtual.imagemC);
+    document.getElementById("labelOpcaoQuatro").innerHTML = buildLabelHTML(questaoAtual.alternativaD, questaoAtual.imagemD);
+
+    // Restore previously saved answer for this question, if any
+    desmarcarRadioButtons()
+    if (respostas[index] !== null) {
+      const options = document.getElementsByName("option")
+      options.forEach(opt => { if (opt.value === respostas[index]) opt.checked = true })
+      habilitarAlternativas(false)
+      btnSubmeter.disabled = true
+      btnProx.disabled = false
+    } else {
+      btnSubmeter.disabled = false
+      btnProx.disabled = true
+    }
+
+    btnAnterior.disabled = numeroDaQuestaoAtual === 0
+  }
+
+  function buildLabelHTML(texto, imagemSrc) {
+    if (imagemSrc) {
+      return `<img src="${imagemSrc}" alt="${texto}" style="width:120px;height:80px;object-fit:cover;display:block;margin-bottom:4px;border-radius:4px;"> ${texto}`
+    }
+    return texto
+  }
+
+  function submeter() {
+    const options = document.getElementsByName("option");
+
+    let hasChecked = false
+    let selectedValue = null
+    for (let i = 0; i < options.length; i++) {
+      if (options[i].checked) {
+        hasChecked = true
+        selectedValue = options[i].value
+        break
+      }
+    }
+
+    if (!hasChecked) {
+      alert("Não há alternativas escolhidas. Escolha uma opção.")
+    } else {
+      respostas[numeroDaQuestaoAtual] = selectedValue
+      btnSubmeter.disabled = true
+      btnProx.disabled = false
+      habilitarAlternativas(false)
+    }
+  }
+
+  function habilitarAlternativas(trueOrFalse) {
+    let opcaoEscolhida = trueOrFalse ? false : true
+
+    primeiraOpcao.disabled = opcaoEscolhida
+    segundaOpcao.disabled = opcaoEscolhida
+    terceiraOpcao.disabled = opcaoEscolhida
+    quartaOpcao.disabled = opcaoEscolhida
+  }
+
+  function avancar() {
+    if (numeroDaQuestaoAtual < quantidadeDeQuestoes - 1) {
+      preencherHTMLcomQuestaoAtual(numeroDaQuestaoAtual + 1)
+    } else {
+      finalizarJogo()
+    }
+  }
+
+  function voltar() {
+    if (numeroDaQuestaoAtual > 0) {
+      preencherHTMLcomQuestaoAtual(numeroDaQuestaoAtual - 1)
+    }
+  }
+
+  function tentarNovamente() {
+    window.location.reload()
+  }
+
+  function desmarcarRadioButtons() {
+    const options = document.getElementsByName("option");
+    for (let i = 0; i < options.length; i++) {
+      options[i].checked = false;
+    }
+  }
+
+  function finalizarJogo() {
+    const payload = listaDeQuestoes.map((q, i) => ({
+      pergunta: q.pergunta,
+      resposta: respostas[i]
+    }))
+
+    fetch('quiz/cadastrar', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ respostas: payload })
+    })
+      .then(r => r.json())
+      .then(data => console.log('API response:', data))
+      .catch(err => console.error('Erro ao enviar respostas:', err))
+
+    document.getElementById('jogo').classList.add("text-new-gray")
+    btnProx.disabled = true
+    btnAnterior.disabled = true
+    btnSubmeter.disabled = true
+    btnTentarNovamente.disabled = false
+  }
+</script>

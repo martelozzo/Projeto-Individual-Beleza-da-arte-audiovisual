@@ -24,15 +24,19 @@ body {
     border-bottom: 1px solid black;
     background-color: rgb(220, 214, 206);
     padding: 10px;
-    justify-content: space-between;
+    justify-content: center;
+    align-items: center;
+    position: relative;
     
 }
 
 .header_title{
 
     font-size: 50px;
-    
-    justify-self: center;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
     
     animation: fadeIn 0.3s ease-in forwards;
 }
@@ -45,6 +49,7 @@ body {
     width: 20%;
     gap: 10%;
     display: flex;
+    margin-left: auto;
 }
 
 .login button{
@@ -68,7 +73,7 @@ body {
 
 .banner {
 
-    background-image: url(file:///home/enzo/Projeto-Individual-Beleza-da-arte-audiovisual/site/assets/imgs/banner_test.png);
+    background-image: url(./assets/imgs/banner_test.png);
     background-size: cover;
     height: 50vh;
     width: 100%;
@@ -185,4 +190,130 @@ body {
     width: 90%;
     justify-self: center;
 
+}
+
+.fundo_login {
+
+    background-image: url(./assets/imgs/banner_test.png);
+    background-size: cover;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.container_login{
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: rgb(220, 214, 206);
+    height: 50vh;
+    width: 90vh;
+    gap: 15px;
+    border-radius: 15px;
+    text-align: center;
+}
+
+.container_login input {
+
+    height: 60px;
+    width: 800px;
+    font-size: medium;
+    text-align: center;
+    
+    border: 4px solid black;
+
+}
+
+.container_login form{
+
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+
+}
+
+.container_login form button{
+
+    width: 400px;
+    height: 50px;
+    margin-top: 30px;
+    align-self: center;
+
+}
+
+.container_login h1 {
+
+    font-size: 3rem;
+    margin-bottom: 2rem;
+
+}
+
+.container_cadastro{
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: rgb(220, 214, 206);
+    height: 70vh;
+    width: 90vh;
+    gap: 15px;
+    border-radius: 15px;
+    text-align: center;
+}
+
+.container_cadastro input {
+
+    height: 60px;
+    width: 800px;
+    font-size: medium;
+    text-align: center;
+    
+    border: 4px solid black;
+
+}
+
+.container_cadastro form{
+
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+
+}
+
+.container_cadastro form button{
+
+    width: 400px;
+    height: 50px;
+    margin-top: 30px;
+    align-self: center;
+
+}
+
+.container_cadastro h1 {
+
+    font-size: 3rem;
+    margin-bottom: 2rem;
+
+}
+
+
+/* QUIZ */
+
+.questao {
+
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    height: 100%; 
+    width: 100%;
+    gap: 3rem;
+    padding-top: 3rem;
+    font-size: 2rem;
 }
