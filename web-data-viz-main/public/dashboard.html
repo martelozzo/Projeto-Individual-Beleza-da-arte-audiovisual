@@ -11,41 +11,73 @@
 
 <body>
     <header class="header">
-        
-        <div class="header_title inter" onclick="window.location.href='index.html'"><p>A beleza e a importância da arte audiovisual</p></div>
+
+        <div class="header_title inter" style="font-size: 2.6rem;" onclick="window.location.href='index.html'" 3>A
+            beleza e
+            a importância da
+            arte audiovisual</div>
         <div class="login inter"><button onclick="window.location.href='login.html'">
                 <p>Login</p>
             </button></div>
     </header>
-<div id="graficos"></div>
+    <div class="inter titulo_dash">Resultados</div>
+    <div class="area_grafs">
+        <div class="container_graf">
+            <canvas id="Chart1"></canvas>
+            <div class="container_button_graf"><button><p>Prev</p></button><button><p>Next</p></button></div>
+        </div>
+
+    </div>
+
 </body>
 
 <script>
 
-    fetch('/quiz/dashboard')
-  .then(r => r.json())
-  .then(questoes => {
-      questoes.forEach((q, i) => {
-          // Cria canvas para cada questão
-          const container = document.getElementById('graficos')
-          container.insertAdjacentHTML('beforeend',
-              `<h3>${q.pergunta}</h3><canvas id="chart-${i}" width="300" height="300"></canvas>`)
 
-          new Chart(document.getElementById(`chart-${i}`), {
-              type: 'pie',
-              data: {
-                  labels: q.alternativas.map(a => a.texto),
-                  datasets: [{
-                      data: q.alternativas.map(a => a.total),
-                      backgroundColor: ['#FF6384','#36A2EB','#FFCE56','#4BC0C0']
-                  }]
-              },
-              options: {
-                  plugins: { legend: { position: 'bottom' } }
-              }
-          })
-      })
-  })
+
+    const DATA_COUNT = 5;
+    const NUMBER_CFG = { count: DATA_COUNT, min: 0, max: 100 };
+
+    const data = {
+        labels: ['Red', 'Orange', 'Yellow', 'Green', 'Blue'],
+        datasets: [
+            {
+                label: 'Dataset 1',
+                // Insira números reais aqui, já que Utils.numbers não existe nativamente
+                data: [12, 19, 3, 5, 2],
+                backgroundColor: [
+                    'rgb(255, 99, 132)',
+                    'rgb(255, 159, 64)',
+                    'rgb(255, 205, 86)',
+                    'rgb(75, 192, 192)',
+                    'rgb(54, 162, 235)'
+                ],
+            }
+        ]
+    };
+
+
+    const config = {
+        type: 'doughnut',
+        data: data,
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'top',
+                },
+                title: {
+                    display: true,
+                    text: 'Questão 1'
+                }
+            }
+        },
+    };
+
+    const myChart = new Chart(
+        document.getElementById('Chart1'), config
+    );
+
 
 </script>
 

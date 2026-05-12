@@ -59,7 +59,7 @@
       </div>
 
       <div id="botoes" class="flex-colunar padding-8" style="position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%);">
-        <button onclick="submeter()" id="btnSubmeter" class="botao" style="height: 3rem; width: 9rem;"><p>Submeter resposta</p></button>
+        <button onclick="submeter()" id="btnSub1meter" class="botao" style="height: 3rem; width: 9rem;"><p>Submeter resposta</p></button>
         <button onclick="voltar()" id="btnAnterior" disabled class="botao" style="height: 3rem; width: 9rem;"><p>Voltar para questão anterior</p></button>
         <button onclick="avancar()" id="btnProx" disabled class="botao" style="height: 3rem; width: 9rem;"><p>Avançar para próxima questão</p></button>
         <button onclick="tentarNovamente()" id="btnTentarNovamente" disabled class="botao" style="height: 3rem; width: 9rem;"><p>Tentar novamente</p></button>
@@ -242,25 +242,7 @@
   }
 
   function finalizarJogo() {
-    const payload = listaDeQuestoes.map((q, i) => ({
-      pergunta: q.pergunta,
-      resposta: respostas[i]
-    }))
-
-    fetch('quiz/cadastrar', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ respostas: payload })
-    })
-      .then(r => r.json())
-      .then(data => console.log('API response:', data))
-      .catch(err => console.error('Erro ao enviar respostas:', err))
-
-    document.getElementById('jogo').classList.add("text-new-gray")
-    btnProx.disabled = true
-    btnAnterior.disabled = true
-    btnSubmeter.disabled = true
-    btnTentarNovamente.disabled = false
-    window.location.href = 'index.html'
+    
+    window.location.href = 'dashboard.html'
   }
 </script>
