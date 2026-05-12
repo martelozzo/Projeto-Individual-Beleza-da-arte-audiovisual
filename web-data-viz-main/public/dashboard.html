@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="all_style.css">
+</head>
+
+<body>
+    <header class="header">
+        
+        <div class="header_title inter" onclick="window.location.href='index.html'"><p>A beleza e a importância da arte audiovisual</p></div>
+        <div class="login inter"><button onclick="window.location.href='login.html'">
+                <p>Login</p>
+            </button></div>
+    </header>
+<div id="graficos"></div>
+</body>
+
+<script>
+
+    fetch('/quiz/dashboard')
+  .then(r => r.json())
+  .then(questoes => {
+      questoes.forEach((q, i) => {
+          // Cria canvas para cada questão
+          const container = document.getElementById('graficos')
+          container.insertAdjacentHTML('beforeend',
+              `<h3>${q.pergunta}</h3><canvas id="chart-${i}" width="300" height="300"></canvas>`)
+
+          new Chart(document.getElementById(`chart-${i}`), {
+              type: 'pie',
+              data: {
+                  labels: q.alternativas.map(a => a.texto),
+                  datasets: [{
+                      data: q.alternativas.map(a => a.total),
+                      backgroundColor: ['#FF6384','#36A2EB','#FFCE56','#4BC0C0']
+                  }]
+              },
+              options: {
+                  plugins: { legend: { position: 'bottom' } }
+              }
+          })
+      })
+  })
+
+</script>
+
+</html>

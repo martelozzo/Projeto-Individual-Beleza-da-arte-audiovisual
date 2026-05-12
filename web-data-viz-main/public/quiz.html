@@ -20,27 +20,26 @@
       </button></div>
   </header>
   <div id="pontuacaoEJogo" style="display: flex; height: 100%; width: 100%;">
-    <button id="btnIniciarQuiz" onclick="iniciarQuiz()" class="botao"
-      style="display:flex; justify-content: center; align-items: center;">
+    <button id="btnIniciarQuiz" onclick="iniciarQuiz()" class="botao" style="display:flex; justify-content: center; align-items: center; height: 4rem; width: 8rem; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
       <p>INICIAR QUIZ</p>
     </button>
 
     <div id="jogo" class="questao inter">
 
       <div id="infoQuestao" class="padding-8" style="display: flex; align-self: flex-start; padding-left: 3rem;">
-        <h3>Questão atual: <span id="spanNumeroDaQuestaoAtual"></span> de <span id="qtdQuestoes"></span>
-          questões.</h3>
+        <p>Questão atual: <span id="spanNumeroDaQuestaoAtual"></span> de <span id="qtdQuestoes"></span>
+          questões.</p>
       </div>
 
-      <div id="perguntaDaQuestaoAtual" class="padding-8" style="padding-top: 2rem;">
-        <span id="spanQuestaoExibida" class="text-bold"></span>
+      <div id="perguntaDaQuestaoAtual" class="padding-8" style="">
+        <span id="spanQuestaoExibida" class="text-bold inter"></span>
       </div>
 
       <div id="infoAlternativas" class="padding-8">
         <span><em>Escolha uma opção dentre as abaixo:</em></span>
       </div>
 
-      <div id="opcoes" class="flex-colunar padding-8" style="padding-top: 3rem;">
+      <div id="opcoes" class="flex-colunar padding-8" style="padding-top: 1rem; display: flex; flex-direction: column; gap: 1rem;">
         <span>
           <input type="radio" id="primeiraOpcao" name="option" class="radio" value="alternativaA" />
           <label for="primeiraOpcao" class="option" id="labelOpcaoUm"></label>
@@ -59,11 +58,11 @@
         </span>
       </div>
 
-      <div id="botoes" class="flex-colunar padding-8">
-        <button onclick="submeter()" id="btnSubmeter">Submeter resposta</button>
-        <button onclick="voltar()" id="btnAnterior" disabled>Voltar para questão anterior</button>
-        <button onclick="avancar()" id="btnProx" disabled>Avançar para próxima questão</button>
-        <button onclick="tentarNovamente()" id="btnTentarNovamente" disabled>Tentar novamente</button>
+      <div id="botoes" class="flex-colunar padding-8" style="position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%);">
+        <button onclick="submeter()" id="btnSubmeter" class="botao" style="height: 3rem; width: 9rem;"><p>Submeter resposta</p></button>
+        <button onclick="voltar()" id="btnAnterior" disabled class="botao" style="height: 3rem; width: 9rem;"><p>Voltar para questão anterior</p></button>
+        <button onclick="avancar()" id="btnProx" disabled class="botao" style="height: 3rem; width: 9rem;"><p>Avançar para próxima questão</p></button>
+        <button onclick="tentarNovamente()" id="btnTentarNovamente" disabled class="botao" style="height: 3rem; width: 9rem;"><p>Tentar novamente</p></button>
       </div>
 
     </div>
@@ -77,33 +76,45 @@
     {
       pergunta: "Qual seu formato de ilustração favorito?",
       alternativaA: "Tradicional/Lápis",
-      alternativaB: "Pintura Realista",
+      alternativaB: "Pintura",
       alternativaC: "Digital",
       alternativaD: "outro",
       imagemA: "",
-      imagemB: "",
+      imagemB: "./assets/imgs/vangogh.webp",
+      imagemC: "./assets/imgs/Mika-Pikazo.jpeg",
+      imagemD: "",
+    },
+
+    {
+      pergunta: "Qual seu estilo de animação favorito?",
+      alternativaA: "Anime",
+      alternativaB: "Cartoon",
+      alternativaC: "3D",
+      alternativaD: "outro",
+      imagemA: "./assets/imgs/FLCL.png",
+      imagemB: "./assets/imgs/avatar.webp",
+      imagemC: "./assets/imgs/divertidamente-2.webp",
+      imagemD: "",
+    },
+
+    {
+      pergunta: "Desses, qual estilo de animação de Anime lhe agrada mais?<br><p>(leia curiosidades para saber mais)</p>",
+      alternativaA: "Kanada-style e parecidos",
+      alternativaB: "Norio-Style e parecidos",
+      alternativaC: "Focado em pós produção",
+      alternativaD: "3D",
+      imagemA: "./assets/imgs/kanada.gif",
+      imagemB: "./assets/imgs/birdy.gif",
       imagemC: "",
       imagemD: "",
     },
 
     {
-      pergunta: "Quantas horas tem em um dia?",
-      alternativaA: "30 horas",
-      alternativaB: "38 horas",
-      alternativaC: "48 horas",
-      alternativaD: "24 horas",
-      imagemA: "",
-      imagemB: "",
-      imagemC: "",
-      imagemD: "",
-    },
-
-    {
-      pergunta: "Qual destes números é ímpar?",
-      alternativaA: "Dez",
-      alternativaB: "Doze",
-      alternativaC: "Oito",
-      alternativaD: "Onze",
+      pergunta: "Qual sua opinião sobre uso de IA na área artística?",
+      alternativaA: "Não concordo",
+      alternativaB: "Concordo",
+      alternativaC: "Indiferente",
+      alternativaD: "Depende",
       imagemA: "",
       imagemB: "",
       imagemC: "",
@@ -162,9 +173,13 @@
     btnAnterior.disabled = numeroDaQuestaoAtual === 0
   }
 
+
   function buildLabelHTML(texto, imagemSrc) {
     if (imagemSrc) {
-      return `<img src="${imagemSrc}" alt="${texto}" style="width:120px;height:80px;object-fit:cover;display:block;margin-bottom:4px;border-radius:4px;"> ${texto}`
+        return `<span style="display:inline-flex; align-items:center; gap:8px;">
+            ${texto}
+            <img src="${imagemSrc}" alt="${texto}" style="height:10rem; object-fit:cover; border-radius:4px; padding-left: 4rem;">
+        </span>`
     }
     return texto
   }
@@ -246,5 +261,6 @@
     btnAnterior.disabled = true
     btnSubmeter.disabled = true
     btnTentarNovamente.disabled = false
+    window.location.href = 'index.html'
   }
 </script>

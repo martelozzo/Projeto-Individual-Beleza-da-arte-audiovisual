@@ -317,3 +317,10 @@ body {
     padding-top: 3rem;
     font-size: 2rem;
 }
+
+.text-bold {
+
+    font-weight: 600;
+    font-size: 3rem;
+
+}
