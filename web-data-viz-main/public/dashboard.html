@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Dashboard</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="all_style.css">
 </head>
@@ -23,8 +23,14 @@
     <div class="inter titulo_dash">Resultados</div>
     <div class="area_grafs">
         <div class="container_graf">
-            <canvas id="Chart1"></canvas>
-            <div class="container_button_graf"><button><p>Prev</p></button><button><p>Next</p></button></div>
+            <div style="display: flex; justify-content: center; font-size: 2rem; padding-bottom: 1rem;" class="inter">Média respostas</div>
+            <canvas id="chart"></canvas>
+            <div class="container_button_graf"></div>
+        </div>
+
+        <div class="container_graf" style="justify-content: flex-end;">
+            <div class="titulo_dash inter">Opinião de IA de Todos</div>
+            <canvas id="Chart_general_ia" style="margin-top: 7rem; height: 9rem;"></canvas>
         </div>
 
     </div>
@@ -33,33 +39,51 @@
 
 <script>
 
+    new Chart(document.getElementById('chart'), {
+        type: 'bar',
+        data: {
+            labels: ['Q1', 'Q2', 'Q3'],
+            datasets: [
+                { label: 'Opção A', data: [51, 30, 82], backgroundColor: '#534AB7' },
+                { label: 'Opção B', data: [29, 45, 10], backgroundColor: '#1D9E75' },
+                { label: 'Opção C', data: [20, 25, 8], backgroundColor: '#EF9F27' },
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                x: { stacked: true },
+                y: { stacked: true }
+            }
+        }
+    });
+
+    // charts questoes
 
 
-    const DATA_COUNT = 5;
-    const NUMBER_CFG = { count: DATA_COUNT, min: 0, max: 100 };
+    // chart ia Chart_general_ia
 
-    const data = {
-        labels: ['Red', 'Orange', 'Yellow', 'Green', 'Blue'],
+    const data_ia = {
+        labels: ["Pro AI", "Anti AI", "1indiferente"],
         datasets: [
             {
                 label: 'Dataset 1',
-                // Insira números reais aqui, já que Utils.numbers não existe nativamente
-                data: [12, 19, 3, 5, 2],
-                backgroundColor: [
-                    'rgb(255, 99, 132)',
+                data: [3, 8, 2],
+                borderColor: ['rgb(255, 99, 132)',
                     'rgb(255, 159, 64)',
-                    'rgb(255, 205, 86)',
-                    'rgb(75, 192, 192)',
-                    'rgb(54, 162, 235)'
-                ],
-            }
+                    'rgb(255, 205, 86)'],
+                backgroundColor: ['rgb(255, 99, 132)',
+                    'rgb(255, 159, 64)',
+                    'rgb(255, 205, 86)'],
+            },
+
         ]
     };
 
-
-    const config = {
-        type: 'doughnut',
-        data: data,
+    const config_ia = {
+        type: 'bar',
+        data: data_ia,
         options: {
             responsive: true,
             plugins: {
@@ -68,16 +92,15 @@
                 },
                 title: {
                     display: true,
-                    text: 'Questão 1'
+                    text: 'Chart.js Bar Chart'
                 }
             }
         },
     };
 
-    const myChart = new Chart(
-        document.getElementById('Chart1'), config
+    const myChart_ia = new Chart(
+        document.getElementById('Chart_general_ia'), config_ia
     );
-
 
 </script>
 

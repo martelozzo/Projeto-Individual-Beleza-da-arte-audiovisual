@@ -334,8 +334,8 @@ body {
 
 .container_graf {
 
-    width: 500px;
-    height: 500px;
+    width: 700px;
+    height: 700px;
     background-color: rgb(239, 235, 229);
     border-radius: 15px;
     padding: 60px;
@@ -350,7 +350,8 @@ body {
 .area_grafs {
 
     display: flex;
-    margin: 4rem;
+    margin: 5rem;
+    justify-content: space-between;
 
 
 }
