@@ -39,6 +39,7 @@
 
 <script>
 
+
     new Chart(document.getElementById('chart'), {
         type: 'bar',
         data: {
@@ -58,7 +59,83 @@
             }
         }
     });
+    /*
+   const CORES = ['#534AB7', '#1D9E75', '#EF9F27', '#D4537E'];
 
+function buildChartData(rows) {
+
+  const questaoIds    = [...new Set(rows.map(r => r.questao_id))];
+  const alternativaIds = [...new Set(rows.map(r => r.alternativa_id))];
+
+
+  const lookup = {};
+  for (const row of rows) {
+    lookup[row.questao_id] ??= {};
+    lookup[row.questao_id][row.alternativa_id] = parseFloat(row.percentual) || 0;
+  }
+
+  const labels = questaoIds.map(id => {
+    const q = rows.find(r => r.questao_id === id);
+    return `Q${id}`;                     
+  });
+
+  const datasets = alternativaIds.map((altId, i) => {
+    const alt = rows.find(r => r.alternativa_id === altId);
+    return {
+      label:           alt.alternativa_texto + (alt.correta ? ' ✓' : ''),
+      backgroundColor: CORES[i % CORES.length],
+      data: questaoIds.map(qid => lookup[qid]?.[altId] ?? 0),
+    };
+  });
+
+  return { labels, datasets };
+}
+
+async function renderizarGrafico() {
+  try {
+    const response = await fetch('/dashboard/barras');
+
+    if (!response.ok) throw new Error('Falha na requisição');
+
+    const rows = await response.json();
+    const { labels, datasets } = buildChartData(rows);
+
+    new Chart(document.getElementById('chart'), {
+      type: 'bar',
+      data: { labels, datasets },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          x: { stacked: true },
+          y: {
+            stacked: true,
+            max: 100,
+            ticks: { callback: v => v + '%' }
+          }
+        },
+        plugins: {
+          tooltip: {
+            callbacks: {
+              label: ctx => `${ctx.dataset.label}: ${ctx.parsed.y}%`
+            }
+          }
+        }
+      }
+    });
+
+  } catch (error) {
+    console.error('Erro ao carregar gráfico:', error);
+    document.getElementById('chart').insertAdjacentHTML(
+      'afterend',
+      '<p style="color:red">Erro ao carregar dados.</p>'
+    );
+  }
+}
+
+
+document.addEventListener('DOMContentLoaded', renderizarGrafico);
+*/
     // charts questoes
 
 
