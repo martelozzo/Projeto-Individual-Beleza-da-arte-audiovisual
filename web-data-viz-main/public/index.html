@@ -146,51 +146,65 @@
         <div class="topico inter">Finalização</div>
         <div style="display: flex; justify-content: space-around; flex-direction: row; width: 100vw;">
             <div style="margin-left: 50px;">
-                <div class="texto inter">Estilos de arte e animação</div>
+                <div class="texto inter" style="display: flex; justify-content: center; align-items: center; font-size: 30px;">Estilos de arte e animação</div>
                 <div><button class="botao" style="height: 8vh;width: 20vh;">
                         <p style="font-size: 20px;">Acessar material</p>
                     </button></div>
             </div>
+            <div class="texto inter" style="display: flex; justify-content: center; align-items: center; font-size: 30px;">
+                Para Jogar o Quiz realize o Login!
+            </div>
+            <!--
             <div style="margin-right: 50px;">
                 <div class="texto inter">Quiz sobre gostos pessoais!</div>
                 <div><button class="botao" style="height: 8vh;width: 20vh;" onclick="window.location.href='quiz.html'">
                         <p style="font-size: 20px;">Acessar Quiz</p>
                     </button></div>
             </div>
-        </div>
-    </div>
-    <footer class="footer" style="background-color: black; margin-top: 100px; display: flex; width: 100%;">
-        <div
-            style="display: flex; justify-content: space-around; flex-direction: row; ; background-color: black; align-items: flex-start;">
-            <div style="display: flex; flex-direction: column; background-color: black; align-items: flex-start;">
-                <div class="topico inter" style="background-color: black;">Shortcuts</div>
-                <div class="inter" style="display: flex; flex-direction: column; flex-wrap: wrap; gap: 15px;">
-                    <a href="mainpage.html" style="color: rgb(220, 214, 206);">
-                        <p style="font-size: 20px;" onclick="">Home</p>
-                    </a>
-                    <a href="login.html" style="color: rgb(220, 214, 206);">
-                        <p style="font-size: 20px;" onclick="">Login</p>
-                    </a>
-                    <p style="font-size: 20px;" onclick="">Material Fundamentos</p>
-                    <p style="font-size: 20px;" onclick="">Material Animação</p>
-                    <p style="font-size: 20px;" onclick="">Material Estilos de Arte</p>
-                    <p style="font-size: 20px;" onclick="window.location.href='quiz.html'">Quiz</p>
-                </div>
-            </div>
-        </div>
-        <div
-            style="display: flex; justify-content: space-around; flex-direction: row; ; background-color: black; align-items: flex-end;">
-            <div style="display: flex; flex-direction: column; background-color: black; align-items: flex-end;">
-                <div class="topico inter">Infos</div>
-            <div class="inter" style="display: flex; flex-direction: column; flex-wrap: wrap; gap: 15px;">
-                <p style="font-size: 20px;">Contact: enzo.martelozzo@sptech.school</p>
-                <p>Projeto Individual</p>
-                <p>SP Tech School</p>
-            </div>
-            </div>
+            -->
+            
             
         </div>
-    </footer>
+    </div>
+<footer style="
+    background-color: #000;
+    width: 100%;
+    margin-top: 100px;
+    padding: 48px 64px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-top: 1px solid #222;
+">
+
+    
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+        <span class="topico inter" style="color: #fff; font-size: 14px; letter-spacing: 2px; text-transform: uppercase; opacity: 0.5;">
+            Shortcuts
+        </span>
+        <nav style="display: flex; flex-direction: column; gap: 12px;">
+            <a href="mainpage.html" class="inter" style="color: rgb(220, 214, 206); font-size: 18px; text-decoration: none;">Home</a>
+            <a href="login.html" class="inter" style="color: rgb(220, 214, 206); font-size: 18px; text-decoration: none;">Login</a>
+            <a href="#" class="inter" style="color: rgb(220, 214, 206); font-size: 18px; text-decoration: none;">Material Fundamentos</a>
+            <a href="#" class="inter" style="color: rgb(220, 214, 206); font-size: 18px; text-decoration: none;">Material Animação</a>
+            <a href="#" class="inter" style="color: rgb(220, 214, 206); font-size: 18px; text-decoration: none;">Material Estilos de Arte</a>
+        </nav>
+    </div>
+
+    <!-- Coluna: Infos -->
+    <div style="display: flex; flex-direction: column; gap: 16px; text-align: right;">
+        <span class="topico inter" style="color: #fff; font-size: 14px; letter-spacing: 2px; text-transform: uppercase; opacity: 0.5;">
+            Infos
+        </span>
+        <div class="inter" style="display: flex; flex-direction: column; gap: 12px; color: rgb(220, 214, 206); font-size: 18px;">
+            <span>enzo.martelozzo@sptech.school</span>
+            <span>Projeto Individual</span>
+            <span>SP Tech School</span>
+        </div>
+    </div>
+
+</footer>
 </body>
 
 </html>

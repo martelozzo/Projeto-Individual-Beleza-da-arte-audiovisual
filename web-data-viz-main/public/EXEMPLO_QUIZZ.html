@@ -5,13 +5,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Exemplo - Quiz</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="all_style.css">
 </head>
 
 
 <body onload="onloadEsconder()">
-    <div id="pontuacaoEJogo">
-        <button id="btnIniciarQuiz" onclick="iniciarQuiz()">INICIAR QUIZ</button>
+    <header class="header">
+
+    <div class="header_title inter" style="font-size: 2.6rem;" onclick="window.location.href='index.html'" 3>A beleza e
+      a importância da
+      arte audiovisual</div>
+    <div class="login inter"><button onclick="window.location.href='login.html'">
+        <p>Login</p>
+      </button></div>
+  </header>
+    <div id="pontuacaoEJogo" style="display: flex; height: 100%; width: 100%;">
+        <button id="btnIniciarQuiz" onclick="iniciarQuiz()" class="botao" style="display:flex; justify-content: center; align-items: center; height: 4rem; width: 8rem; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);"><p>INICIAR QUIZ</p></button>
 
         <div id="pontuacao" class="flex-colunar width-fit-content border-primary">
             <div id="pontuacaoDuranteJogo" class="flex-colunar padding-8">
@@ -26,9 +35,9 @@
             </div>
         </div>
 
-        <div id="jogo" class="width-fit-content flex-colunar border-secondary">
+        <div id="jogo"  class="questao inter">
 
-            <div id="infoQuestao" class="padding-8">
+            <div id="infoQuestao" class="padding-8" style="display: flex; align-self: flex-start; padding-left: 3rem;">
                 <span>Questão atual: <span id="spanNumeroDaQuestaoAtual"></span> de <span id="qtdQuestoes"></span>
                     questões.</span>
             </div>
@@ -41,7 +50,7 @@
                 <span><em>Escolha uma opção dentre as abaixo:</em></span>
             </div>
 
-            <div id="opcoes" class="flex-colunar padding-8">
+            <div id="opcoes" class="flex-colunar padding-8" style="padding-top: 1rem; display: flex; flex-direction: column; gap: 1rem;">
                 <span>
                     <input type="radio" id="primeiraOpcao" name="option" class="radio" value="alternativaA" />
                     <label for="primeiraOpcao" class="option" id="labelOpcaoUm"></label>
@@ -60,11 +69,11 @@
                 </span>
             </div>
 
-            <div id="botoes" class="flex-colunar padding-8">
-                <button onclick="submeter()" id="btnSubmeter">Submeter resposta</button>
-                <button onclick="avancar()" id="btnProx" disabled>Avançar para próxima questão</button>
+            <div id="botoes" class="flex-colunar padding-8" style="position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%);">
+                <button onclick="submeter()" id="btnSubmeter" class="botao" style="height: 3rem; width: 9rem;"><p>Submeter resposta</p></button>
+                <button onclick="avancar()" id="btnProx" disabled class="botao" style="height: 3rem; width: 9rem;"><p>Avançar para próxima questão</p></button>
                 <!-- <button onclick="finalizar()" id="btnConcluir" disabled>Finalizar Quiz</button> -->
-                <button onclick="tentarNovamente()" id="btnTentarNovamente" disabled>Tentar novamente</button>
+                <button onclick="tentarNovamente()" id="btnTentarNovamente"  class="botao" style="height: 3rem; width: 9rem;" disabled><p>Tentar novamente</p></button>
             </div>
 
         </div>
@@ -76,30 +85,46 @@
     const listaDeQuestoes = [
 
         {
-            pergunta: "Qual mês tem 30 dias?",
-            alternativaA: "Janeiro",
-            alternativaB: "Dezembro",
-            alternativaC: "Junho",
-            alternativaD: "Agosto",
+            pergunta: "Quantos fundamentos tem a Arte?",
+            alternativaA: "10",
+            alternativaB: "12",
+            alternativaC: "7",
+            alternativaD: "5",
             alternativaCorreta: "alternativaC"
         },
 
         {
-            pergunta: "Quantas horas tem em um dia?",
-            alternativaA: "30 horas",
-            alternativaB: "38 horas",
-            alternativaC: "48 horas",
-            alternativaD: "24 horas",
+            pergunta: "Quantos princípios tem a Animação?",
+            alternativaA: "15",
+            alternativaB: "7",
+            alternativaC: "10",
+            alternativaD: "12",
             alternativaCorreta: "alternativaD"
         },
 
         {
-            pergunta: "Qual destes números é ímpar?",
-            alternativaA: "Dez",
-            alternativaB: "Doze",
-            alternativaC: "Oito",
-            alternativaD: "Onze",
-            alternativaCorreta: "alternativaD"
+            pergunta: "Na arte 'A última ceia' qual conceito revolucionário na época foi utilizado?",
+            alternativaA: "Luz em Sombra",
+            alternativaB: "Perspectiva",
+            alternativaC: "Religião",
+            alternativaD: "Anatomia",
+            alternativaCorreta: "alternativaB"
+        },
+        {
+            pergunta: "Qual destes fundamentos da arte se demonstra o mais essencial como base?",
+            alternativaA: "Formas",
+            alternativaB: "Luz e sombra",
+            alternativaC: "Cor",
+            alternativaD: "Anatomia",
+            alternativaCorreta: "alternativaA"
+        },
+        {
+            pergunta: "Quais conceitos geralmente mais ajudam na 'Fluidez' de uma animação?",
+            alternativaA: "Timing e Distorção",
+            alternativaB: "Mais frames por segundo",
+            alternativaC: "",
+            alternativaD: "Anatomia",
+            alternativaCorreta: "alternativaB"
         }
 
     ]
