@@ -11,7 +11,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
         rel="stylesheet">
-        <script src="sessao.js"></script>
+        <script src="./js/sessao.js"></script>
 </head>
 
 <body>
@@ -48,12 +48,16 @@
                 Não possui conta?
                 <a href="cadastro.html">Criar conta</a>
             </p>
-        </div>
-                        <div id="div_aguardar" class="loading-div">
+            <div id="div_aguardar" class="loading-div">
                     <img src="./assets/circle-loading.gif" id="loading-gif">
                 </div>
+            <div class="card_erro" id="cardErro">
+                <span id="mensagem_erro"></span>
+            </div>
+        </div>
+                        
 
-                <div id="div_erros_login"></div>
+                
 
     </div>
 </body>
@@ -81,6 +85,7 @@
         console.log("FORM SENHA: ", senhaVar);
 
         fetch("/usuarios/autenticar", {
+            
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -98,13 +103,13 @@
                 resposta.json().then(json => {
                     console.log(json);
                     console.log(JSON.stringify(json));
-                    sessionStorage.EMAIL_USUARIO = json.email;
-                    sessionStorage.NOME_USUARIO = json.nome;
-                    sessionStorage.ID_USUARIO = json.id;
-                    sessionStorage.AQUARIOS = JSON.stringify(json.aquarios)
+                    sessionStorage.EMAIL_USUARIO = json[0].email;
+                    sessionStorage.NOME_USUARIO = json[0].nome;
+                    sessionStorage.ID_USUARIO = json[0].id;
+                    //sessionStorage.AQUARIOS = JSON.stringify(json.aquarios)
 
                     setTimeout(function () {
-                        window.location = "./dashboard/cards.html";
+                        window.location.href = "EXEMPLO_QUIZZ.html";
                     }, 1000); // apenas para exibir o loading
 
                 });
@@ -120,7 +125,7 @@
             }
 
         }).catch(function (erro) {
-            console.log(erro);
+            console.error('erro no fetch',erro);
         })
 
         return false;
