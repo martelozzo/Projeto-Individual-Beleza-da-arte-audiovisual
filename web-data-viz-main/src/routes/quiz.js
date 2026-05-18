@@ -8,9 +8,9 @@ router.post("/cadastrar", function (req, res) {
     quizController.cadastrar(req, res);
 });
 
-router.get("/listar", function (req, res) {
+/*router.get("/listar", function (req, res) {
     // função a ser chamada quando acessar /carros/listar
     quizController.listar(req, res);
-});
+});*/
 
 module.exports = router;
