@@ -12,15 +12,19 @@
 <body onload="onloadEsconder()">
     <header class="header">
 
-    <div class="header_title inter" style="font-size: 2.6rem;" onclick="window.location.href='index.html'" 3>A beleza e
-      a importância da
-      arte audiovisual</div>
-    <div class="login inter"><button onclick="window.location.href='login.html'">
-        <p>Login</p>
-      </button></div>
-  </header>
+        <div class="header_title inter" style="font-size: 2.6rem;" onclick="window.location.href='index.html'" 3>A
+            beleza e
+            a importância da
+            arte audiovisual</div>
+        <div class="login inter"><button onclick="window.location.href='login.html'">
+                <p>Login</p>
+            </button></div>
+    </header>
     <div id="pontuacaoEJogo" style="display: flex; height: 100%; width: 100%;">
-        <button id="btnIniciarQuiz" onclick="iniciarQuiz()" class="botao" style="display:flex; justify-content: center; align-items: center; height: 4rem; width: 8rem; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);"><p>INICIAR QUIZ</p></button>
+        <button id="btnIniciarQuiz" onclick="iniciarQuiz()" class="botao"
+            style="display:flex; justify-content: center; align-items: center; height: 4rem; width: 8rem; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+            <p>INICIAR QUIZ</p>
+        </button>
 
         <div id="pontuacao" class="flex-colunar width-fit-content border-primary">
             <div id="pontuacaoDuranteJogo" class="flex-colunar padding-8">
@@ -35,7 +39,8 @@
             </div>
         </div>
 
-        <div id="jogo"  class="questao inter">
+        <div id="jogo" class="inter"
+            style="position: relative; padding-bottom: 11rem; display: flex; flex-direction: column;">
 
             <div id="infoQuestao" class="padding-8" style="display: flex; align-self: flex-start; padding-left: 3rem;">
                 <span>Questão atual: <span id="spanNumeroDaQuestaoAtual"></span> de <span id="qtdQuestoes"></span>
@@ -50,31 +55,45 @@
                 <span><em>Escolha uma opção dentre as abaixo:</em></span>
             </div>
 
-            <div id="opcoes" class="flex-colunar padding-8" style="padding-top: 1rem; display: flex; flex-direction: column; gap: 1rem;">
+            <div id="imagemQuestao"></div>
+
+            <div id="opcoes" class="flex-colunar padding-8"
+                style="padding-top: 1rem; display: flex; flex-direction: column; gap: 1rem;">
                 <span>
-                    <input type="radio" id="primeiraOpcao" name="option" class="radio" value="alternativaA" />
+                    <input type="radio" id="primeiraOpcao" name="option" class="radio" />
                     <label for="primeiraOpcao" class="option" id="labelOpcaoUm"></label>
                 </span>
                 <span>
-                    <input type="radio" id="segundaOpcao" name="option" class="radio" value="alternativaB" />
+                    <input type="radio" id="segundaOpcao" name="option" class="radio" />
                     <label for="segundaOpcao" class="option" id="labelOpcaoDois"></label>
                 </span>
                 <span>
-                    <input type="radio" id="terceiraOpcao" name="option" class="radio" value="alternativaC" />
+                    <input type="radio" id="terceiraOpcao" name="option" class="radio" />
                     <label for="terceiraOpcao" class="option" id="labelOpcaoTres"></label>
                 </span>
                 <span>
-                    <input type="radio" id="quartaOpcao" name="option" class="radio" value="alternativaD" />
+                    <input type="radio" id="quartaOpcao" name="option" class="radio" />
                     <label for="quartaOpcao" class="option" id="labelOpcaoQuatro"></label>
                 </span>
+                <span id="msgEnvio" class="width-fit-content" style="margin-top: 0.5rem;"></span>
+
             </div>
 
-            <div id="botoes" class="flex-colunar padding-8" style="position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%);">
-                <button onclick="submeter()" id="btnSubmeter" class="botao" style="height: 3rem; width: 9rem;"><p>Submeter resposta</p></button>
-                <button onclick="avancar()" id="btnProx" disabled class="botao" style="height: 3rem; width: 9rem;"><p>Avançar para próxima questão</p></button>
+            <div id="botoes" class="flex-colunar padding-8" style="display: flex; flex-direction: row; flex-wrap: wrap; gap: 0.5rem; justify-content: center; align-items: center;
+            position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); width: max-content;">
+                <button onclick="submeter()" id="btnSubmeter" class="botao" style="height: 3rem; width: 9rem;">
+                    <p>Submeter resposta</p>
+                </button>
+                <button onclick="avancar()" id="btnProx" disabled class="botao" style="height: 3rem; width: 9rem;">
+                    <p>Avançar para próxima questão</p>
+                </button>
                 <!-- <button onclick="finalizar()" id="btnConcluir" disabled>Finalizar Quiz</button> -->
-                <button onclick="tentarNovamente()" id="btnTentarNovamente"  class="botao" style="height: 3rem; width: 9rem;" disabled><p>Tentar novamente</p></button>
+                <button onclick="tentarNovamente()" id="btnTentarNovamente" class="botao"
+                    style="height: 3rem; width: 9rem;" disabled>
+                    <p>Tentar novamente</p>
+                </button>
             </div>
+
 
         </div>
     </div>
@@ -83,60 +102,93 @@
 </html>
 <script>
     const listaDeQuestoes = [
-
         {
-            pergunta: "Quantos fundamentos tem a Arte?",
-            alternativaA: "10",
-            alternativaB: "12",
-            alternativaC: "7",
-            alternativaD: "5",
-            alternativaCorreta: "alternativaC"
-        },
-
-        {
-            pergunta: "Quantos princípios tem a Animação?",
-            alternativaA: "15",
-            alternativaB: "7",
-            alternativaC: "10",
-            alternativaD: "12",
-            alternativaCorreta: "alternativaD"
-        },
-
-        {
-            pergunta: "Na arte 'A última ceia' qual conceito revolucionário na época foi utilizado?",
-            alternativaA: "Luz em Sombra",
-            alternativaB: "Perspectiva",
-            alternativaC: "Religião",
-            alternativaD: "Anatomia",
-            alternativaCorreta: "alternativaB"
+            id: 1,
+            enunciado: "Quantos fundamentos tem a Arte?",
+            imagem: "https://ricardoguchi.com.br/wp-content/uploads/2021/03/fundamentos-do-desenho.jpg",
+            alternativas: [
+                { id: 1, texto: "10", correta: false, ordem: 1 },
+                { id: 2, texto: "12", correta: false, ordem: 2 },
+                { id: 3, texto: "7", correta: true, ordem: 3 },
+                { id: 4, texto: "5", correta: false, ordem: 4 }
+            ]
         },
         {
-            pergunta: "Qual destes fundamentos da arte se demonstra o mais essencial como base?",
-            alternativaA: "Formas",
-            alternativaB: "Luz e sombra",
-            alternativaC: "Cor",
-            alternativaD: "Anatomia",
-            alternativaCorreta: "alternativaA"
+            id: 2,
+            enunciado: "Quantos princípios tem a Animação?",
+            imagem: "",
+            alternativas: [
+                { id: 5, texto: "15", correta: false, ordem: 1 },
+                { id: 6, texto: "7", correta: false, ordem: 2 },
+                { id: 7, texto: "10", correta: false, ordem: 3 },
+                { id: 8, texto: "12", correta: true, ordem: 4 }
+            ]
         },
         {
-            pergunta: "Quais conceitos geralmente mais ajudam na 'Fluidez' de uma animação?",
-            alternativaA: "Timing e Distorção",
-            alternativaB: "Mais frames por segundo",
-            alternativaC: "",
-            alternativaD: "Anatomia",
-            alternativaCorreta: "alternativaB"
+            id: 3,
+            enunciado: "Na arte 'A última ceia' de Leonardo qual conceito revolucionário na época foi utilizado?",
+            imagem: "",
+            alternativas: [
+                { id: 9, texto: "Luz em Sombra", correta: false, ordem: 1 },
+                { id: 10, texto: "Perspectiva", correta: true, ordem: 2 },
+                { id: 11, texto: "Religião", correta: false, ordem: 3 },
+                { id: 12, texto: "Anatomia", correta: false, ordem: 4 }
+            ]
+        },
+        {
+            id: 4,
+            enunciado: "Qual destes fundamentos da arte se demonstra o mais essencial como base?",
+            imagem: "",
+            alternativas: [
+                { id: 13, texto: "Formas", correta: true, ordem: 1 },
+                { id: 14, texto: "Luz e sombra", correta: false, ordem: 2 },
+                { id: 15, texto: "Cor", correta: false, ordem: 3 },
+                { id: 16, texto: "Anatomia", correta: false, ordem: 4 }
+            ]
+        },
+        {
+            id: 5,
+            enunciado: "Quais conceitos geralmente mais ajudam na 'Fluidez' de uma animação?",
+            imagem: "",
+            alternativas: [
+                { id: 17, texto: "Timing e Distorção", correta: false, ordem: 1 },
+                { id: 18, texto: "Mais frames por segundo", correta: true, ordem: 2 },
+                { id: 19, texto: "Mesclar com 3D", correta: false, ordem: 3 },
+                { id: 20, texto: "Anatomia", correta: false, ordem: 4 }
+            ]
+        },
+        {
+            id: 6,
+            enunciado: "Quais conceitos geralmente mais ajudam na 'Fluidez' de uma animação?",
+            imagem: "",
+            alternativas: [
+                { id: 21, texto: "Timing e Distorção", correta: false, ordem: 1 },
+                { id: 22, texto: "Mais frames por segundo", correta: true, ordem: 2 },
+                { id: 23, texto: "Mesclar com 3D", correta: false, ordem: 3 },
+                { id: 24, texto: "Anatomia", correta: false, ordem: 4 }
+            ]
         }
-
     ]
 
-    // variáveis globais    
+    let respostasParaEnviar = []
+
+    function getUsuarioId() {
+        const id = localStorage.getItem('usuario_id')
+
+        if (!id) {
+            console.warn('Usuário não autenticado.')
+            return null
+        }
+        return parseInt(id)
+    }
+
     let numeroDaQuestaoAtual = 0
     let pontuacaoFinal = 0
-    let tentativaIncorreta = 0
+    //let tentativaIncorreta = 0
     let certas = 0
     let erradas = 0
     let quantidadeDeQuestoes = listaDeQuestoes.length
-    // let isUltima = numeroDaQuestaoAtual == quantidadeDeQuestoes-1 ? true : false
+
 
     function onloadEsconder() {
         document.getElementById('pontuacao').style.display = "none"
@@ -158,19 +210,65 @@
         btnTentarNovamente.disabled = true
     }
 
+
+    function preencherHTMLcomQuestaoAtual(index) {
+    habilitarAlternativas(true)
+
+    const questao = listaDeQuestoes[index]
+    numeroDaQuestaoAtual = index
+
+    // Atualiza contador de questão
+    document.getElementById("spanNumeroDaQuestaoAtual").innerHTML = index + 1
+
+    // Preenche o enunciado
+    document.getElementById("spanQuestaoExibida").innerHTML = questao.enunciado
+
+    // Exibe ou oculta a imagem (campo só do front, nunca vai ao banco)
+    const imgContainer = document.getElementById("imagemQuestao")
+    if (questao.imagem) {
+        imgContainer.innerHTML = `<img src="${questao.imagem}" alt="Imagem da questão">`
+        imgContainer.style.display = "block"
+    } else {
+        imgContainer.innerHTML = ""
+        imgContainer.style.display = "none"
+    }
+
+    // Ordena as alternativas pelo campo `ordem` antes de exibir
+    const ordenadas = [...questao.alternativas].sort((a, b) => a.ordem - b.ordem)
+
+    const inputIds = ["primeiraOpcao", "segundaOpcao", "terceiraOpcao", "quartaOpcao"]
+    const labelIds = ["labelOpcaoUm", "labelOpcaoDois", "labelOpcaoTres", "labelOpcaoQuatro"]
+
+    ordenadas.forEach((alt, i) => {
+        const input = document.getElementById(inputIds[i])
+
+        // Injeta alternativas.id no input — será lido em checarResposta()
+        // para montar o payload { questao_id, alternativa_id }
+        input.dataset.altId = alt.id
+
+        // Injeta se esta alternativa é a correta — lido em checarResposta()
+        // para saber se acertou sem precisar reler listaDeQuestoes
+        input.dataset.correta = alt.correta
+
+        document.getElementById(labelIds[i]).innerHTML = alt.texto
+    })
+}
+    /*
     function preencherHTMLcomQuestaoAtual(index) {
         habilitarAlternativas(true)
         const questaoAtual = listaDeQuestoes[index]
         numeroDaQuestaoAtual = index
         console.log("questaoAtual")
         console.log(questaoAtual)
-        document.getElementById("spanNumeroDaQuestaoAtual").innerHTML = Number(index) + 1 // ajustando porque o index começa em 0
+        /*document.getElementById("spanNumeroDaQuestaoAtual").innerHTML = Number(index) + 1 // ajustando porque o index começa em 0
         document.getElementById("spanQuestaoExibida").innerHTML = questaoAtual.pergunta;
         document.getElementById("labelOpcaoUm").innerHTML = questaoAtual.alternativaA;
         document.getElementById("labelOpcaoDois").innerHTML = questaoAtual.alternativaB;
         document.getElementById("labelOpcaoTres").innerHTML = questaoAtual.alternativaC;
         document.getElementById("labelOpcaoQuatro").innerHTML = questaoAtual.alternativaD;
-    }
+        document.getElementById("imagemQuestao").innerHTML = questaoAtual.imagem;
+        
+    }*/
 
     function submeter() {
         const options = document.getElementsByName("option"); // recupera alternativas no html
@@ -228,39 +326,46 @@
     }
 
     function checarResposta() {
-        const questaoAtual = listaDeQuestoes[numeroDaQuestaoAtual] // questão atual 
-        const respostaQuestaoAtual = questaoAtual.alternativaCorreta // qual é a resposta correta da questão atual
+        const questao = listaDeQuestoes[numeroDaQuestaoAtual]
+        const options = [...document.getElementsByName("option")]
 
-        const options = document.getElementsByName("option"); // recupera alternativas no html
+        // Encontra o input marcado pelo usuário
+        const opcaoMarcada = options.find(o => o.checked)
 
-        let alternativaCorreta = null // variável para armazenar a alternativa correta
+        // Encontra o input da alternativa correta (para destacar visualmente)
+        const opcaoCorreta = options.find(o => o.dataset.correta === "true")
 
-        options.forEach((option) => {
-            if (option.value === respostaQuestaoAtual) {
-                console.log("alternativaCorreta está no componente: " + alternativaCorreta)
-                alternativaCorreta = option.labels[0].id
+        if (!opcaoMarcada) return
+
+        // Lê data-correta injetado por preencherHTMLcomQuestaoAtual()
+        const acertou = opcaoMarcada.dataset.correta === "true"
+
+        if (acertou) {
+            opcaoMarcada.labels[0].classList.add("text-success-with-bg")
+            pontuacaoFinal++
+            certas++
+            document.getElementById("spanCertas").innerHTML = certas
+        } else {
+            // Marca a escolhida como errada e destaca a correta
+            opcaoMarcada.labels[0].classList.add("text-danger-with-bg")
+            if (opcaoCorreta) {
+                opcaoCorreta.labels[0].classList.add("text-success-with-bg")
             }
+            erradas++
+            document.getElementById("spanErradas").innerHTML = erradas
+        }
+
+        // Registra a resposta com os IDs reais do banco.
+        // Estes são os únicos campos da tabela `respostas` que vêm do front:
+        //   questao_id     → questoes.id
+        //   alternativa_id → alternativas.id
+        // usuario_id é adicionado depois em enviarRespostasParaBancoDeDados()
+        respostasParaEnviar.push({
+            questao_id: questao.id,
+            alternativa_id: parseInt(opcaoMarcada.dataset.altId)
         })
 
-        // verifica se resposta assinalada é correta
-        options.forEach((option) => {
-            if (option.checked === true && option.value === respostaQuestaoAtual) {
-                document.getElementById(alternativaCorreta).classList.add("text-success-with-bg")
-                pontuacaoFinal++
-                certas++
-                document.getElementById("spanCertas").innerHTML = certas
-                numeroDaQuestaoAtual++
-            } else if (option.checked && option.value !== respostaQuestaoAtual) {
-                const wrongLabelId = option.labels[0].id
-
-                document.getElementById(wrongLabelId).classList.add("text-danger-with-bg")
-                document.getElementById(alternativaCorreta).classList.add("text-success-with-bg")
-                tentativaIncorreta++
-                erradas++
-                document.getElementById("spanErradas").innerHTML = erradas
-                numeroDaQuestaoAtual++
-            }
-        })
+        numeroDaQuestaoAtual++
     }
 
     function limparCoresBackgroundOpcoes() {
@@ -279,36 +384,81 @@
     }
 
     function finalizarJogo() {
-        let textoParaMensagemFinal = null
-        let classComCoresParaMensagemFinal = null
-        const porcentagemFinalDeAcertos = pontuacaoFinal / quantidadeDeQuestoes
+        const porcentagem = pontuacaoFinal / quantidadeDeQuestoes
+        let msgTexto, msgClasse
 
-        if (porcentagemFinalDeAcertos <= 0.3) {
-            textoParaMensagemFinal = "Parece que você não estudou..."
-            classComCoresParaMensagemFinal = "text-danger-with-bg"
-        }
-        else if (porcentagemFinalDeAcertos > 0.3 && porcentagemFinalDeAcertos < 0.9) {
-            textoParaMensagemFinal = "Pode melhorar na próxima, hein!"
-            classComCoresParaMensagemFinal = "text-warning-with-bg"
-        }
-        else if (porcentagemFinalDeAcertos >= 0.9) {
-            textoParaMensagemFinal = "Uau, parabéns!"
-            classComCoresParaMensagemFinal = "text-success-with-bg"
+        if (porcentagem <= 0.3) {
+            msgTexto = "Parece que você não estudou..."
+            msgClasse = "text-danger-with-bg"
+        } else if (porcentagem < 0.9) {
+            msgTexto = "Pode melhorar na próxima, hein!"
+            msgClasse = "text-warning-with-bg"
+        } else {
+            msgTexto = "Uau, parabéns!"
+            msgClasse = "text-success-with-bg"
         }
 
-        textoParaMensagemFinal += "<br> Você acertou " + Math.round((porcentagemFinalDeAcertos)*100) + "% das questões."
+        msgTexto += `<br> Você acertou ${Math.round(porcentagem * 100)}% das questões.`
 
-
-        document.getElementById('msgFinal').innerHTML = textoParaMensagemFinal
-        document.getElementById('msgFinal').classList.add(classComCoresParaMensagemFinal) 
+        document.getElementById('msgFinal').innerHTML = msgTexto
+        document.getElementById('msgFinal').classList.add(msgClasse)
         document.getElementById('spanPontuacaoFinal').innerHTML = pontuacaoFinal
-
-        document.getElementById('jogo').classList.add("text-new-gray") 
+        document.getElementById('jogo').classList.add("text-new-gray")
 
         btnProx.disabled = true
         btnSubmeter.disabled = true
-        // btnConcluir.disabled = true
         btnTentarNovamente.disabled = false
 
+        // Dispara o envio ao banco — só acontece aqui,
+        // depois que todas as respostas foram coletadas em respostasParaEnviar
+        enviarRespostasParaBancoDeDados()
     }
+
+    async function enviarRespostasParaBancoDeDados() {
+    const msgEnvio  = document.getElementById('msgEnvio')
+    const usuarioId = getUsuarioId() // ← única chamada de getUsuarioId()
+
+    if (!usuarioId) {
+        msgEnvio.innerHTML   = "Faça login para salvar seus resultados."
+        msgEnvio.style.color = "orange"
+        return // interrompe sem fazer o fetch
+    }
+
+    msgEnvio.innerHTML = "Salvando resultados..."
+
+    // Payload exato esperado pela rota POST /quiz/cadastrar
+    // O back-end fará um INSERT para cada item de `respostas`:
+    //
+    //   INSERT INTO respostas (usuario_id, questao_id, alternativa_id)
+    //   VALUES (?, ?, ?)
+    //
+    // A UNIQUE KEY (usuario_id, questao_id) do banco impede duplicatas.
+    const payload = {
+        usuario_id: usuarioId,         // usuarios.id  ← vem do localStorage
+        respostas:  respostasParaEnviar // [{ questao_id, alternativa_id }, ...]
+    }
+
+    try {
+        const response = await fetch('/quiz/cadastrar', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+        })
+
+        if (response.ok) {
+            msgEnvio.innerHTML   = "Resultados salvos com sucesso!"
+            msgEnvio.style.color = "green"
+        } else {
+            const errorText = await response.text()
+            console.error('Erro do servidor:', errorText)
+            msgEnvio.innerHTML   = `Erro ${response.status}: ${response.statusText}`
+            msgEnvio.style.color = "red"
+        }
+    } catch (error) {
+        // Falha de rede ou servidor fora do ar
+        console.error('Falha na requisição:', error)
+        msgEnvio.innerHTML   = "Não foi possível conectar ao servidor."
+        msgEnvio.style.color = "red"
+    }
+}
 </script>
