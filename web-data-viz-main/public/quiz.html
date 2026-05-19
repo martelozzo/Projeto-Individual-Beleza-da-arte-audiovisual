@@ -21,18 +21,18 @@
                 <p>Sair</p>
             </button></div>
     </header>
-    <div id="pontuacaoEJogo" style="display: flex; height: 100%; width: 100%;">
+    <div id="pontuacaoEJogo" style="display: flex; height: 100%; width: 100%; gap: 2rem; flex-wrap: wrap;">
         <button id="btnIniciarQuiz" onclick="iniciarQuiz()" class="botao"
             style="display:flex; justify-content: center; align-items: center; height: 4rem; width: 8rem; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
             <p>INICIAR QUIZ</p>
         </button>
 
-        <div id="pontuacao" class="flex-colunar width-fit-content border-primary">
+        <div id="pontuacao" class="flex-colunar width-fit-content border-primary" style="margin: 2rem;">
             <div id="pontuacaoDuranteJogo" class="flex-colunar padding-8">
-                <span class="width-fit-content">Quantidade de acertos: <span id="spanCertas"></span></span>
-                <span class="width-fit-content">Quantidade de erros: <span id="spanErradas"></span></span>
+                <span class="width-fit-content">Quantidade de acertos: <span id="spanCertas"><br></span></span>
+                <span class="width-fit-content">Quantidade de erros: <span id="spanErradas"><br></span></span>
             </div>
-            <div id="pontuacaoFinalJogo" class="flex-colunar padding-8">
+            <div id="pontuacaoFinalJogo" class="flex-colunar padding-8" style="margin: 2rem;">
                 <span id="pontuacaoFinal" class="width-fit-content">Pontuação Final:
                     <span id="spanPontuacaoFinal">***</span>
                 </span>
@@ -41,7 +41,7 @@
         </div>
 
         <div id="jogo" class="inter"
-            style="position: relative; padding-bottom: 11rem; display: flex; flex-direction: column;">
+            style="position: relative; padding-bottom: 11rem; display: flex; flex-direction: column; margin: 3rem; gap: 2rem;">
 
             <div id="infoQuestao" class="padding-8" style="display: flex; align-self: flex-start; padding-left: 3rem;">
                 <span>Questão atual: <span id="spanNumeroDaQuestaoAtual"></span> de <span id="qtdQuestoes"></span>
@@ -56,24 +56,24 @@
                 <span><em>Escolha uma opção dentre as abaixo:</em></span>
             </div>
 
-            <div id="imagemQuestao"></div>
+            <div id="imagemQuestao" style="display: flex; justify-content: center; align-items: center;"></div>
 
             <div id="opcoes" class="flex-colunar padding-8"
                 style="padding-top: 1rem; display: flex; flex-direction: column; gap: 1rem;">
                 <span>
-                    <input type="radio" id="primeiraOpcao" name="option" class="radio" />
+                    <input type="radio" id="primeiraOpcao" name="option" class="radio" value="alternativaA" />
                     <label for="primeiraOpcao" class="option" id="labelOpcaoUm"></label>
                 </span>
                 <span>
-                    <input type="radio" id="segundaOpcao" name="option" class="radio" />
+                    <input type="radio" id="segundaOpcao" name="option" class="radio" value="alternativaB" />
                     <label for="segundaOpcao" class="option" id="labelOpcaoDois"></label>
                 </span>
                 <span>
-                    <input type="radio" id="terceiraOpcao" name="option" class="radio" />
+                    <input type="radio" id="terceiraOpcao" name="option" class="radio" value="alternativaC" />
                     <label for="terceiraOpcao" class="option" id="labelOpcaoTres"></label>
                 </span>
                 <span>
-                    <input type="radio" id="quartaOpcao" name="option" class="radio" />
+                    <input type="radio" id="quartaOpcao" name="option" class="radio" value="alternativaD" />
                     <label for="quartaOpcao" class="option" id="labelOpcaoQuatro"></label>
                 </span>
                 <span id="msgEnvio" class="width-fit-content" style="margin-top: 0.5rem;"></span>
@@ -92,6 +92,9 @@
                 <button onclick="tentarNovamente()" id="btnTentarNovamente" class="botao"
                     style="height: 3rem; width: 9rem;" disabled>
                     <p>Tentar novamente</p>
+                </button>
+                <button onclick="irParaDash()" id="btnDash" class="botao" disabled style="display: none; height: 3rem; width: 9rem;">
+                    <p>Resultados</p>
                 </button>
             </div>
 
@@ -112,144 +115,140 @@
 
 
     function logout(){
-
         sessionStorage.clear();
         window.location.href = `login.html`
-
     }
 
     const listaDeQuestoes = [
+
         {
             id: 1,
-            enunciado: "Quantos fundamentos tem a Arte?",
+            pergunta: "Quantos fundamentos tem a Arte?",
             imagem: "https://ricardoguchi.com.br/wp-content/uploads/2021/03/fundamentos-do-desenho.jpg",
-            alternativas: [
-                { id: 1, texto: "10", correta: false, ordem: 1 },
-                { id: 2, texto: "12", correta: false, ordem: 2 },
-                { id: 3, texto: "7", correta: true, ordem: 3 },
-                { id: 4, texto: "5", correta: false, ordem: 4 }
-            ]
+            alternativaA: "10",    idA: 1,
+            alternativaB: "12",    idB: 2,
+            alternativaC: "7",     idC: 3,
+            alternativaD: "5",     idD: 4,
+            alternativaCorreta: "alternativaC"
         },
+
         {
             id: 2,
-            enunciado: "Quantos princípios tem a Animação?",
+            pergunta: "Quantos princípios tem a Animação?",
             imagem: "",
-            alternativas: [
-                { id: 5, texto: "15", correta: false, ordem: 1 },
-                { id: 6, texto: "7", correta: false, ordem: 2 },
-                { id: 7, texto: "10", correta: false, ordem: 3 },
-                { id: 8, texto: "12", correta: true, ordem: 4 }
-            ]
+            alternativaA: "15",    idA: 5,
+            alternativaB: "7",     idB: 6,
+            alternativaC: "10",    idC: 7,
+            alternativaD: "12",    idD: 8,
+            alternativaCorreta: "alternativaD"
         },
+
         {
             id: 3,
-            enunciado: "Na arte 'A última ceia' de Leonardo qual conceito revolucionário na época foi utilizado?",
-            imagem: "",
-            alternativas: [
-                { id: 9, texto: "Luz em Sombra", correta: false, ordem: 1 },
-                { id: 10, texto: "Perspectiva", correta: true, ordem: 2 },
-                { id: 11, texto: "Religião", correta: false, ordem: 3 },
-                { id: 12, texto: "Anatomia", correta: false, ordem: 4 }
-            ]
+            pergunta: "Na arte 'A última ceia' de Leonardo qual conceito revolucionário na época foi utilizado?",
+            imagem: "https://static.todamateria.com.br/upload/ul/ti/ultima_ceia_da_vinci_1_694x250_c.jpg",
+            alternativaA: "Luz em Sombra",    idA: 9,
+            alternativaB: "Perspectiva",      idB: 10,
+            alternativaC: "Religião",         idC: 11,
+            alternativaD: "Anatomia",         idD: 12,
+            alternativaCorreta: "alternativaB"
         },
+
         {
             id: 4,
-            enunciado: "Qual destes fundamentos da arte se demonstra o mais essencial como base?",
+            pergunta: "Qual destes fundamentos da arte se demonstra o mais essencial como base?",
             imagem: "",
-            alternativas: [
-                { id: 13, texto: "Formas", correta: true, ordem: 1 },
-                { id: 14, texto: "Luz e sombra", correta: false, ordem: 2 },
-                { id: 15, texto: "Cor", correta: false, ordem: 3 },
-                { id: 16, texto: "Anatomia", correta: false, ordem: 4 }
-            ]
+            alternativaA: "Formas",        idA: 13,
+            alternativaB: "Luz e sombra",  idB: 14,
+            alternativaC: "Cor",           idC: 15,
+            alternativaD: "Anatomia",      idD: 16,
+            alternativaCorreta: "alternativaA"
         },
+
         {
             id: 5,
-            enunciado: "Quais conceitos geralmente mais ajudam na 'Fluidez' de uma animação?",
+            pergunta: "Quais conceitos geralmente mais ajudam na 'Fluidez' de uma animação?",
             imagem: "",
-            alternativas: [
-                { id: 17, texto: "Timing e Distorção", correta: false, ordem: 1 },
-                { id: 18, texto: "Mais frames por segundo", correta: true, ordem: 2 },
-                { id: 19, texto: "Mesclar com 3D", correta: false, ordem: 3 },
-                { id: 20, texto: "Anatomia", correta: false, ordem: 4 }
-            ]
+            alternativaA: "Timing e Distorção",      idA: 17,
+            alternativaB: "Mais frames por segundo",  idB: 18,
+            alternativaC: "Mesclar com 3D",          idC: 19,
+            alternativaD: "Anatomia",                idD: 20,
+            alternativaCorreta: "alternativaA"
         },
+
         {
             id: 6,
-            enunciado: "Por qual destes motivos a arte teve grande influência no avanço científico que contribuiu a curar vidas?",
+            pergunta: "Por qual destes motivos a arte teve grande influência no avanço científico que contribuiu a salvar vidas?",
             imagem: "",
-            alternativas: [
-                { id: 21, texto: "Primeira inspeção anatômica de um corpo falecido foi feito por um artista, tendo uso medicinal", correta: true, ordem: 1 },
-                { id: 22, texto: "A procura de mais tintas se foi criado remédios", correta: false, ordem: 2 },
-                { id: 23, texto: "A pintura de obras religiosas que eram usadas como terapia visual para acalmar os enfermos", correta: false, ordem: 3 },
-                { id: 24, texto: "A invenção de novos pincéis que foram adaptados como ferramentas cirúrgicas", correta: false, ordem: 4 }
-            ]
+            alternativaA: "Primeira inspeção anatômica de um corpo falecido foi feito por um artista, tendo uso medicinal",  idA: 21,
+            alternativaB: "A procura de mais tintas se foi criado remédios",                                                 idB: 22,
+            alternativaC: "A pintura de obras religiosas que eram usadas como terapia visual para acalmar os enfermos",     idC: 23,
+            alternativaD: "A invenção de novos pincéis que foram adaptados como ferramentas cirúrgicas",                    idD: 24,
+            alternativaCorreta: "alternativaA"
         },
-        { 
+
+        {
             id: 7,
-            enunciado: "Qual o nome da técnica utilizada na imagem acima?",
+            pergunta: "Qual o nome da técnica utilizada na imagem acima?",
             imagem: "",
-            alternativas: [
-                { id: 25, texto: "Oclusão de Ambiente", correta: false, ordem: 1 },
-                { id: 26, texto: "Sombra de Contato", correta: false, ordem: 2 },
-                { id: 27, texto: "Disperção Subsuperficial", correta: true, ordem: 3 },
-                { id: 28, texto: "Reflexão de Matiz", correta: false, ordem: 4 }
-            ]
+            alternativaA: "Oclusão de Ambiente",        idA: 25,
+            alternativaB: "Sombra de Contato",          idB: 26,
+            alternativaC: "Disperção Subsuperficial",   idC: 27,
+            alternativaD: "Reflexão de Matiz",          idD: 28,
+            alternativaCorreta: "alternativaC"
         },
-        { 
+
+        {
             id: 8,
-            enunciado: "Qual estilo de animação é conhecido por usar poucos frames, porém com distorções exagerada?",
+            pergunta: "Qual estilo de animação é conhecido por usar poucos frames, porém com distorções exagerada?",
             imagem: "",
-            alternativas: [
-                { id: 29, texto: "Itano Circus", correta: false, ordem: 1 },
-                { id: 30, texto: "Obari Style", correta: false, ordem: 2 },
-                { id: 31, texto: "Norio Style", correta: false, ordem: 3 },
-                { id: 32, texto: "Kanada Style", correta: true, ordem: 4 }
-            ]
+            alternativaA: "Itano Circus",   idA: 29,
+            alternativaB: "Obari Style",    idB: 30,
+            alternativaC: "Norio Style",    idC: 31,
+            alternativaD: "Kanada Style",   idD: 32,
+            alternativaCorreta: "alternativaD"
         },
+
         {
             id: 9,
-            enunciado: "Quem foi o criador da famosa técnica chamda 'Impact Frames' ou Frames de Impacto?",
+            pergunta: "Quem foi o criador da famosa técnica chamada 'Impact Frames' ou Frames de Impacto?",
             imagem: "",
-            alternativas: [
-                { id: 33, texto: "Yutaka Nakamura", correta: false, ordem: 1 },
-                { id: 34, texto: "Vincent Chansard", correta: false, ordem: 2 },
-                { id: 35, texto: "James Baxter", correta: false, ordem: 3 },
-                { id: 36, texto: "Weiling Zhang", correta: true, ordem: 4 }
-        ]
+            alternativaA: "Yutaka Nakamura",   idA: 33,
+            alternativaB: "Vincent Chansard",  idB: 34,
+            alternativaC: "James Baxter",      idC: 35,
+            alternativaD: "Weiling Zhang",     idD: 36,
+            alternativaCorreta: "alternativaA"
         },
+
         {
             id: 10,
-            enunciado: "Quais das ilustrações estão anatomicamente correta?",
+            pergunta: "Quais das ilustrações estão anatomicamente correta?",
             imagem: "",
-            alternativas: [
-                { id: 37, texto: "Primeira", correta: false, ordem: 1 },
-                { id: 38, texto: "Segunda", correta: false, ordem: 2 },
-                { id: 39, texto: "Terceira", correta: false, ordem: 3 },
-                { id: 40, texto: "Quarta", correta: true, ordem: 4 }
-        ]
+            alternativaA: "Primeira",   idA: 37,
+            alternativaB: "Segunda",    idB: 38,
+            alternativaC: "Terceira",   idC: 39,
+            alternativaD: "Quarta",     idD: 40,
+            alternativaCorreta: "alternativaD"
         }
+
     ]
 
+    // variáveis globais
     let respostasParaEnviar = []
+    let numeroDaQuestaoAtual = 0
+    let pontuacaoFinal = 0
+    let certas = 0
+    let erradas = 0
+    let quantidadeDeQuestoes = listaDeQuestoes.length
 
     function getUsuarioId() {
         const id = sessionStorage.getItem('ID_USUARIO')
-
         if (!id) {
             console.warn('Usuário não autenticado.')
             return null
         }
         return parseInt(id)
     }
-
-    let numeroDaQuestaoAtual = 0
-    let pontuacaoFinal = 0
-    //let tentativaIncorreta = 0
-    let certas = 0
-    let erradas = 0
-    let quantidadeDeQuestoes = listaDeQuestoes.length
-
 
     function onloadEsconder() {
         document.getElementById('pontuacao').style.display = "none"
@@ -267,72 +266,33 @@
 
         btnSubmeter.disabled = false
         btnProx.disabled = true
-        // btnConcluir.disabled = true
         btnTentarNovamente.disabled = true
     }
 
-
-    function preencherHTMLcomQuestaoAtual(index) {
-    habilitarAlternativas(true)
-
-    const questao = listaDeQuestoes[index]
-    numeroDaQuestaoAtual = index
-
-    // Atualiza contador de questão
-    document.getElementById("spanNumeroDaQuestaoAtual").innerHTML = index + 1
-
-    // Preenche o enunciado
-    document.getElementById("spanQuestaoExibida").innerHTML = questao.enunciado
-
-    // Exibe ou oculta a imagem (campo só do front, nunca vai ao banco)
-    const imgContainer = document.getElementById("imagemQuestao")
-    if (questao.imagem) {
-        imgContainer.innerHTML = `<img src="${questao.imagem}" alt="Imagem da questão">`
-        imgContainer.style.display = "block"
-    } else {
-        imgContainer.innerHTML = ""
-        imgContainer.style.display = "none"
-    }
-
-    // Ordena as alternativas pelo campo `ordem` antes de exibir
-    const ordenadas = [...questao.alternativas].sort((a, b) => a.ordem - b.ordem)
-
-    const inputIds = ["primeiraOpcao", "segundaOpcao", "terceiraOpcao", "quartaOpcao"]
-    const labelIds = ["labelOpcaoUm", "labelOpcaoDois", "labelOpcaoTres", "labelOpcaoQuatro"]
-
-    ordenadas.forEach((alt, i) => {
-        const input = document.getElementById(inputIds[i])
-
-        // Injeta alternativas.id no input — será lido em checarResposta()
-        // para montar o payload { questao_id, alternativa_id }
-        input.dataset.altId = alt.id
-
-        // Injeta se esta alternativa é a correta — lido em checarResposta()
-        // para saber se acertou sem precisar reler listaDeQuestoes
-        input.dataset.correta = alt.correta
-
-        document.getElementById(labelIds[i]).innerHTML = alt.texto
-    })
-}
-    /*
     function preencherHTMLcomQuestaoAtual(index) {
         habilitarAlternativas(true)
         const questaoAtual = listaDeQuestoes[index]
         numeroDaQuestaoAtual = index
-        console.log("questaoAtual")
-        console.log(questaoAtual)
-        /*document.getElementById("spanNumeroDaQuestaoAtual").innerHTML = Number(index) + 1 // ajustando porque o index começa em 0
+
+        document.getElementById("spanNumeroDaQuestaoAtual").innerHTML = Number(index) + 1
         document.getElementById("spanQuestaoExibida").innerHTML = questaoAtual.pergunta;
-        document.getElementById("labelOpcaoUm").innerHTML = questaoAtual.alternativaA;
-        document.getElementById("labelOpcaoDois").innerHTML = questaoAtual.alternativaB;
-        document.getElementById("labelOpcaoTres").innerHTML = questaoAtual.alternativaC;
+        document.getElementById("labelOpcaoUm").innerHTML    = questaoAtual.alternativaA;
+        document.getElementById("labelOpcaoDois").innerHTML  = questaoAtual.alternativaB;
+        document.getElementById("labelOpcaoTres").innerHTML  = questaoAtual.alternativaC;
         document.getElementById("labelOpcaoQuatro").innerHTML = questaoAtual.alternativaD;
-        document.getElementById("imagemQuestao").innerHTML = questaoAtual.imagem;
-        
-    }*/
+
+        const imgContainer = document.getElementById("imagemQuestao")
+        if (questaoAtual.imagem) {
+            imgContainer.innerHTML = `<img src="${questaoAtual.imagem}" alt="Imagem da questão" style="max-height:300px">`
+            imgContainer.style.display = "block"
+        } else {
+            imgContainer.innerHTML = ""
+            imgContainer.style.display = "none"
+        }
+    }
 
     function submeter() {
-        const options = document.getElementsByName("option"); // recupera alternativas no html
+        const options = document.getElementsByName("option");
 
         let hasChecked = false
         for (let i = 0; i < options.length; i++) {
@@ -361,7 +321,6 @@
         segundaOpcao.disabled = opcaoEscolhida
         terceiraOpcao.disabled = opcaoEscolhida
         quartaOpcao.disabled = opcaoEscolhida
-
     }
 
     function avancar() {
@@ -382,51 +341,52 @@
     }
 
     function tentarNovamente() {
-        // atualiza a página
         window.location.reload()
     }
 
     function checarResposta() {
-        const questao = listaDeQuestoes[numeroDaQuestaoAtual]
-        const options = [...document.getElementsByName("option")]
+        const questaoAtual = listaDeQuestoes[numeroDaQuestaoAtual]
+        const respostaQuestaoAtual = questaoAtual.alternativaCorreta
 
-        // Encontra o input marcado pelo usuário
-        const opcaoMarcada = options.find(o => o.checked)
+        const options = document.getElementsByName("option");
 
-        // Encontra o input da alternativa correta (para destacar visualmente)
-        const opcaoCorreta = options.find(o => o.dataset.correta === "true")
+        let alternativaCorreta = null
 
-        if (!opcaoMarcada) return
-
-        // Lê data-correta injetado por preencherHTMLcomQuestaoAtual()
-        const acertou = opcaoMarcada.dataset.correta === "true"
-
-        if (acertou) {
-            opcaoMarcada.labels[0].classList.add("text-success-with-bg")
-            pontuacaoFinal++
-            certas++
-            document.getElementById("spanCertas").innerHTML = certas
-        } else {
-            // Marca a escolhida como errada e destaca a correta
-            opcaoMarcada.labels[0].classList.add("text-danger-with-bg")
-            if (opcaoCorreta) {
-                opcaoCorreta.labels[0].classList.add("text-success-with-bg")
+        options.forEach((option) => {
+            if (option.value === respostaQuestaoAtual) {
+                alternativaCorreta = option.labels[0].id
             }
-            erradas++
-            document.getElementById("spanErradas").innerHTML = erradas
-        }
-
-        // Registra a resposta com os IDs reais do banco.
-        // Estes são os únicos campos da tabela `respostas` que vêm do front:
-        //   questao_id     → questoes.id
-        //   alternativa_id → alternativas.id
-        // usuario_id é adicionado depois em enviarRespostasParaBancoDeDados()
-        respostasParaEnviar.push({
-            questao_id: questao.id,
-            alternativa_id: parseInt(opcaoMarcada.dataset.altId)
         })
 
-        numeroDaQuestaoAtual++
+        options.forEach((option) => {
+            if (option.checked === true && option.value === respostaQuestaoAtual) {
+                document.getElementById(alternativaCorreta).classList.add("text-success-with-bg")
+                pontuacaoFinal++
+                certas++
+                document.getElementById("spanCertas").innerHTML = certas
+                numeroDaQuestaoAtual++
+            } else if (option.checked && option.value !== respostaQuestaoAtual) {
+                const wrongLabelId = option.labels[0].id
+                document.getElementById(wrongLabelId).classList.add("text-danger-with-bg")
+                document.getElementById(alternativaCorreta).classList.add("text-success-with-bg")
+                erradas++
+                document.getElementById("spanErradas").innerHTML = erradas
+                numeroDaQuestaoAtual++
+            }
+        })
+
+        // Registra a resposta com os IDs do banco para envio posterior
+        const idMap = {
+            alternativaA: questaoAtual.idA,
+            alternativaB: questaoAtual.idB,
+            alternativaC: questaoAtual.idC,
+            alternativaD: questaoAtual.idD
+        }
+        const opcaoMarcada = [...options].find(o => o.checked)
+        respostasParaEnviar.push({
+            questao_id:     questaoAtual.id,
+            alternativa_id: idMap[opcaoMarcada.value]
+        })
     }
 
     function limparCoresBackgroundOpcoes() {
@@ -445,81 +405,82 @@
     }
 
     function finalizarJogo() {
-        const porcentagem = pontuacaoFinal / quantidadeDeQuestoes
-        let msgTexto, msgClasse
+        let textoParaMensagemFinal = null
+        let classComCoresParaMensagemFinal = null
+        const porcentagemFinalDeAcertos = pontuacaoFinal / quantidadeDeQuestoes
 
-        if (porcentagem <= 0.3) {
-            msgTexto = "Parece que você não estudou..."
-            msgClasse = "text-danger-with-bg"
-        } else if (porcentagem < 0.9) {
-            msgTexto = "Pode melhorar na próxima, hein!"
-            msgClasse = "text-warning-with-bg"
-        } else {
-            msgTexto = "Uau, parabéns!"
-            msgClasse = "text-success-with-bg"
+        if (porcentagemFinalDeAcertos <= 0.3) {
+            textoParaMensagemFinal = "Parece que você não estudou..."
+            classComCoresParaMensagemFinal = "text-danger-with-bg"
+        }
+        else if (porcentagemFinalDeAcertos > 0.3 && porcentagemFinalDeAcertos < 0.9) {
+            textoParaMensagemFinal = "Pode melhorar na próxima, hein!"
+            classComCoresParaMensagemFinal = "text-warning-with-bg"
+        }
+        else if (porcentagemFinalDeAcertos >= 0.9) {
+            textoParaMensagemFinal = "Uau, parabéns!"
+            classComCoresParaMensagemFinal = "text-success-with-bg"
         }
 
-        msgTexto += `<br> Você acertou ${Math.round(porcentagem * 100)}% das questões.`
+        textoParaMensagemFinal += "<br> Você acertou " + Math.round((porcentagemFinalDeAcertos)*100) + "% das questões."
 
-        document.getElementById('msgFinal').innerHTML = msgTexto
-        document.getElementById('msgFinal').classList.add(msgClasse)
+        document.getElementById('msgFinal').innerHTML = textoParaMensagemFinal
+        document.getElementById('msgFinal').classList.add(classComCoresParaMensagemFinal)
         document.getElementById('spanPontuacaoFinal').innerHTML = pontuacaoFinal
+
         document.getElementById('jogo').classList.add("text-new-gray")
 
         btnProx.disabled = true
         btnSubmeter.disabled = true
         btnTentarNovamente.disabled = false
 
-        // Dispara o envio ao banco — só acontece aqui,
-        // depois que todas as respostas foram coletadas em respostasParaEnviar
         enviarRespostasParaBancoDeDados()
     }
 
     async function enviarRespostasParaBancoDeDados() {
-    const msgEnvio  = document.getElementById('msgEnvio')
-    const usuarioId = getUsuarioId() // ← única chamada de getUsuarioId()
+        const msgEnvio  = document.getElementById('msgEnvio')
+        const usuarioId = getUsuarioId()
 
-    if (!usuarioId) {
-        msgEnvio.innerHTML   = "Faça login para salvar seus resultados."
-        msgEnvio.style.color = "orange"
-        return // interrompe sem fazer o fetch
-    }
+        if (!usuarioId) {
+            msgEnvio.innerHTML   = "Faça login para salvar seus resultados."
+            msgEnvio.style.color = "orange"
+            return
+        }
 
-    msgEnvio.innerHTML = "Salvando resultados..."
+        msgEnvio.innerHTML = "Salvando resultados..."
 
-    // Payload exato esperado pela rota POST /quiz/cadastrar
-    // O back-end fará um INSERT para cada item de `respostas`:
-    //
-    //   INSERT INTO respostas (usuario_id, questao_id, alternativa_id)
-    //   VALUES (?, ?, ?)
-    //
-    // A UNIQUE KEY (usuario_id, questao_id) do banco impede duplicatas.
-    const payload = {
-        usuario_id: usuarioId,         // usuarios.id  ← vem do localStorage
-        respostas:  respostasParaEnviar // [{ questao_id, alternativa_id }, ...]
-    }
+        const payload = {
+            usuario_id: usuarioId,
+            respostas:  respostasParaEnviar
+        }
 
-    try {
-        const response = await fetch('/quiz/cadastrar', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload)
-        })
+        try {
+            const response = await fetch('/quiz/cadastrar', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            })
 
-        if (response.ok) {
-            msgEnvio.innerHTML   = "Resultados salvos com sucesso!"
-            msgEnvio.style.color = "green"
-        } else {
-            const errorText = await response.text()
-            console.error('Erro do servidor:', errorText)
-            msgEnvio.innerHTML   = `Erro ${response.status}: ${response.statusText}`
+            if (response.ok) {
+                msgEnvio.innerHTML   = "Resultados salvos com sucesso!"
+                msgEnvio.style.color = "green"
+                document.getElementById('btnDash').style.display = "flex"
+                btnDash.disabled = false;
+            } else {
+                const errorText = await response.text()
+                console.error('Erro do servidor:', errorText)
+                msgEnvio.innerHTML   = `Erro ${response.status}: ${response.statusText}`
+                msgEnvio.style.color = "red"
+            }
+        } catch (error) {
+            console.error('Falha na requisição:', error)
+            msgEnvio.innerHTML   = "Não foi possível conectar ao servidor."
             msgEnvio.style.color = "red"
         }
-    } catch (error) {
-        // Falha de rede ou servidor fora do ar
-        console.error('Falha na requisição:', error)
-        msgEnvio.innerHTML   = "Não foi possível conectar ao servidor."
-        msgEnvio.style.color = "red"
     }
-}
+
+    function irParaDash() {
+        window.location.href = `dashboard.html`
+    }
+
 </script>

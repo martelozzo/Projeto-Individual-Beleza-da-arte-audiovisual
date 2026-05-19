@@ -9,22 +9,30 @@ var quizModel = require("../models/quizModel");
     })
 }*/
 
+
 function cadastrar(req, res) {
-    var usuarioId  = req.body.usuario_id;
-    var respostas  = req.body.respostas;   // array [{ questao_id, alternativa_id }, ...]
+    var usuarioId = req.body.usuario_id;
+    var respostas = req.body.respostas;   // array [{ questao_id, alternativa_id }, ...]
 
     if (usuarioId == undefined || respostas == undefined) {
         res.status(400).send("usuario_id ou respostas estão undefined!");
         return;
     }
 
-    // Cria uma promise de INSERT para cada resposta do array
-    var inserções = respostas.map(function(resposta) {
-        return quizModel.cadastrar(usuarioId, resposta.questao_id, resposta.alternativa_id);
-    });
-
-    // Executa todas as inserções e aguarda terminar
-    Promise.all(inserções).then(function() {
+    // Extrai os 10 alternativa_ids em ordem do array para passar como variáveis individuais
+    quizModel.cadastrar(
+        usuarioId,
+        respostas[0].alternativa_id,
+        respostas[1].alternativa_id,
+        respostas[2].alternativa_id,
+        respostas[3].alternativa_id,
+        respostas[4].alternativa_id,
+        respostas[5].alternativa_id,
+        respostas[6].alternativa_id,
+        respostas[7].alternativa_id,
+        respostas[8].alternativa_id,
+        respostas[9].alternativa_id
+    ).then(function() {
         res.status(200).send("Respostas cadastradas com sucesso!");
     }).catch(function(erro) {
         res.status(500).json(erro.sqlMessage);
