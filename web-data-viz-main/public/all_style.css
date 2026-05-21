@@ -609,3 +609,20 @@ body {
     color: #666;
 
 }
+
+.container_kpi_questoes {
+
+    display: flex;
+    width: 10rem;
+    height: 10rem;
+    background-color: rgb(248, 244, 238);
+    border-radius: 15px;
+    
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+
+
+}
