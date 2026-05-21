@@ -25,6 +25,14 @@
     </header>
     <div class="inter titulo_dash">Resultados</div>
     <div class="area_grafs">
+
+        <div class="container_graf_individual" >
+            <div class="titulo_graf_individual inter">Seu nível é...</div>
+            <div class="categoria_individual inter" style="color: green;">Iniciante</div>
+            <div class="descricao_individual inter">acertou 2/10, estude mais!</div>
+        </div>
+    </div>
+    <div class="area_grafs">
         <div class="container_graf">
             <div style="display: flex; justify-content: center; font-size: 2rem; padding-bottom: 1rem;" class="inter">
                 Média respostas</div>
@@ -43,32 +51,32 @@
                 </div>
                 <div class="container_kpi_user">
                     <div class="titulo_kpi inter" style="padding-bottom: 1.5rem;">Nota Média</div>
-                    <div class="dado_kpi_user inter">6.7</div>
+                    <div class="dado_kpi_user inter" style="color: green;">6.7</div>
                 </div>
 
             </div>
             <div class="div_lsk">
                 <div class="container_kpi_user_large">
                     <div class="container_kpi_user_mini">
-                        <div class="titulo_kpi_mini inter">Iniciante (0-4)</div>
+                        <div class="titulo_kpi_mini inter" style="color: green;">Iniciante (0-4)</div>
                         <div class="dado_kpi_user inter">38%</div>
                         <div class="dado_mini inter">560 usuários</div>
                     </div>
                     
                     <div class="container_kpi_user_mini" >
-                        <div class="titulo_kpi_mini inter">Avançado (8-9)</div>
+                        <div class="titulo_kpi_mini inter" style="color: orange;">Avançado (8-9)</div>
                         <div class="dado_kpi_user inter">14%</div>
                         <div class="dado_mini inter">240 usuários</div>
                     </div>
 
                     <div class="container_kpi_user_mini" style="margin-left: 0px;">
-                        <div class="titulo_kpi_mini inter">Intermediário (5-7)</div>
+                        <div class="titulo_kpi_mini inter" style="color: rgb(188, 182, 0);">Intermediário (5-7)</div>
                         <div class="dado_kpi_user inter">41%</div>
                         <div class="dado_mini inter">950 usuários</div>
                     </div>
 
                     <div class="container_kpi_user_mini" style="margin-left: 0px;">
-                        <div class="titulo_kpi_mini inter">Expert (10)</div>
+                        <div class="titulo_kpi_mini inter" style="color: red;">Expert (10)</div>
                         <div class="dado_kpi_user inter">7%</div>
                         <div class="dado_mini inter">87 usuários</div>
                     </div>
@@ -83,6 +91,11 @@
 </body>
 
 <script>
+
+    function logout(){
+        sessionStorage.clear();
+        window.location.href = `login.html`
+    }
 
 
     new Chart(document.getElementById('chart'), {

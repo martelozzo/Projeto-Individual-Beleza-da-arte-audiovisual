@@ -434,7 +434,100 @@
         btnSubmeter.disabled = true
         btnTentarNovamente.disabled = false
 
-        enviarRespostasParaBancoDeDados()
+        validarBanco()
+    }
+
+
+    async function validarBanco() {
+        
+        const usuarioId = getUsuarioId()
+
+        if (!usuarioId) {
+            msgEnvio.innerHTML   = "Faça login para salvar seus resultados."
+            msgEnvio.style.color = "orange"
+            return
+        }
+
+        const payload = {
+            usuario_id: usuarioId,
+            //respostas:  respostasParaEnviar
+        }
+
+        try {
+            const response = await fetch('/quiz/validar', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            })
+
+            if (response.ok) {
+                msgEnvio.innerHTML   = "Ja respondido antes, indo atualizar respostas"
+                msgEnvio.style.color = "green"
+                console.log(`passei no repsondido antes`);
+                
+                atualizarRespostarParaBanco()
+            } else {
+                const errorText = await response.text()
+                console.error('Erro do servidor:', errorText)
+                //msgEnvio.innerHTML   = `Erro ${response.status}: ${response.statusText}`
+                msgEnvio.innerHTML   = `indo enviar respostas para banco...`
+                msgEnvio.style.color = "green"
+                console.log(`passei no enviar novo`);
+                enviarRespostasParaBancoDeDados()
+            }
+        } catch (error) {
+            console.error('Falha na requisição:',   error)
+            msgEnvio.innerHTML   = "Não foi possível conectar ao servidor."
+            msgEnvio.style.color = "red"
+        }
+    }
+
+    async function atualizarRespostarParaBanco() {
+        const msgEnvio  = document.getElementById('msgEnvio')
+        const usuarioId = getUsuarioId()
+
+        if (!usuarioId) {
+            msgEnvio.innerHTML   = "Faça login para salvar seus resultados."
+            msgEnvio.style.color = "orange"
+            return
+        }
+
+        
+
+        msgEnvio.innerHTML = "Salvando resultados..."
+
+        const payload = {
+            usuario_id: usuarioId,
+            respostas:  respostasParaEnviar
+        }
+
+        try {
+            const response = await fetch('/quiz/atualizar', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            })
+
+            if (response.ok) {
+                msgEnvio.innerHTML   = "Resultados salvos com sucesso!"
+                msgEnvio.style.color = "green"
+                document.getElementById('btnDash').style.display = "flex"
+                btnDash.disabled = false;
+            } else {
+                const errorText = await response.text()
+                console.error('Erro do servidor:', errorText)
+                msgEnvio.innerHTML   = `Erro ${response.status}: ${response.statusText}`
+                msgEnvio.style.color = "red"
+            }
+        } catch (error) {
+            console.error('Falha na requisição:', error)
+            msgEnvio.innerHTML   = "Não foi possível conectar ao servidor."
+            msgEnvio.style.color = "red"
+        }
+    }
+
+    function irParaDash() {
+        window.location.href = `dashboard.html`
     }
 
     async function enviarRespostasParaBancoDeDados() {
@@ -446,6 +539,8 @@
             msgEnvio.style.color = "orange"
             return
         }
+
+        
 
         msgEnvio.innerHTML = "Salvando resultados..."
 
