@@ -16,7 +16,9 @@
             beleza e
             a importância da
             arte audiovisual</div>
-            <div class="user inter"><p id="pfp"></p></div>
+        <div class="user inter">
+            <p id="pfp"></p>
+        </div>
         <div class="inter"><button class="sair" onclick=logout()>
                 <p>Sair</p>
             </button></div>
@@ -24,15 +26,57 @@
     <div class="inter titulo_dash">Resultados</div>
     <div class="area_grafs">
         <div class="container_graf">
-            <div style="display: flex; justify-content: center; font-size: 2rem; padding-bottom: 1rem;" class="inter">Média respostas</div>
-            <canvas id="chart"></canvas>
+            <div style="display: flex; justify-content: center; font-size: 2rem; padding-bottom: 1rem;" class="inter">
+                Média respostas</div>
+            <canvas id="chart" style="margin-bottom: 40px;"></canvas>
             <div class="container_button_graf"></div>
         </div>
 
-        <div class="container_graf" style="justify-content: flex-end;">
-            <div class="titulo_dash inter">Opinião de IA de Todos</div>
-            <canvas id="Chart_general_ia" style="margin-top: 7rem; height: 9rem;"></canvas>
+        <div class="container_graf_kpi" style="justify-content: flex-end;">
+            <div class="inter"
+                style="display: flex; justify-content: center; font-size: 2rem; padding-bottom: 1rem; align-items: center;">
+                Desempenho Geral</div>
+            <div class="div_lsk">
+                <div class="container_kpi_user">
+                    <div class="titulo_kpi inter" style="padding-bottom: 1.5rem;">Usuários participantes</div>
+                    <div class="dado_kpi_user inter">2500</div>
+                </div>
+                <div class="container_kpi_user">
+                    <div class="titulo_kpi inter" style="padding-bottom: 1.5rem;">Nota Média</div>
+                    <div class="dado_kpi_user inter">6.7</div>
+                </div>
+
+            </div>
+            <div class="div_lsk">
+                <div class="container_kpi_user_large">
+                    <div class="container_kpi_user_mini">
+                        <div class="titulo_kpi_mini inter">Iniciante (0-4)</div>
+                        <div class="dado_kpi_user inter">38%</div>
+                        <div class="dado_mini inter">560 usuários</div>
+                    </div>
+                    
+                    <div class="container_kpi_user_mini" >
+                        <div class="titulo_kpi_mini inter">Avançado (8-9)</div>
+                        <div class="dado_kpi_user inter">14%</div>
+                        <div class="dado_mini inter">240 usuários</div>
+                    </div>
+
+                    <div class="container_kpi_user_mini" style="margin-left: 0px;">
+                        <div class="titulo_kpi_mini inter">Intermediário (5-7)</div>
+                        <div class="dado_kpi_user inter">41%</div>
+                        <div class="dado_mini inter">950 usuários</div>
+                    </div>
+
+                    <div class="container_kpi_user_mini" style="margin-left: 0px;">
+                        <div class="titulo_kpi_mini inter">Expert (10)</div>
+                        <div class="dado_kpi_user inter">7%</div>
+                        <div class="dado_mini inter">87 usuários</div>
+                    </div>
+                </div>
+
+            </div>
         </div>
+    </div>
 
     </div>
 
@@ -44,14 +88,16 @@
     new Chart(document.getElementById('chart'), {
         type: 'bar',
         data: {
-            labels: ['Q1', 'Q2', 'Q3'],
+            labels: ['Q1', 'Q2', 'Q3', 'Q4', 'Q5', 'Q6', 'Q7', 'Q8', 'Q9', 'Q10'],
             datasets: [
                 { label: 'Opção A', data: [51, 30, 82], backgroundColor: '#534AB7' },
                 { label: 'Opção B', data: [29, 45, 10], backgroundColor: '#1D9E75' },
                 { label: 'Opção C', data: [20, 25, 8], backgroundColor: '#EF9F27' },
+                { label: 'Opção D', data: [20, 25, 8], backgroundColor: '#2F7F27' }
             ]
         },
         options: {
+            indexAxis: 'y', // deixa as barras horizontais
             responsive: true,
             maintainAspectRatio: false,
             scales: {
@@ -60,125 +106,9 @@
             }
         }
     });
-    /*
-   const CORES = ['#534AB7', '#1D9E75', '#EF9F27', '#D4537E'];
-
-function buildChartData(rows) {
-
-  const questaoIds    = [...new Set(rows.map(r => r.questao_id))];
-  const alternativaIds = [...new Set(rows.map(r => r.alternativa_id))];
 
 
-  const lookup = {};
-  for (const row of rows) {
-    lookup[row.questao_id] ??= {};
-    lookup[row.questao_id][row.alternativa_id] = parseFloat(row.percentual) || 0;
-  }
 
-  const labels = questaoIds.map(id => {
-    const q = rows.find(r => r.questao_id === id);
-    return `Q${id}`;                     
-  });
-
-  const datasets = alternativaIds.map((altId, i) => {
-    const alt = rows.find(r => r.alternativa_id === altId);
-    return {
-      label:           alt.alternativa_texto + (alt.correta ? ' ✓' : ''),
-      backgroundColor: CORES[i % CORES.length],
-      data: questaoIds.map(qid => lookup[qid]?.[altId] ?? 0),
-    };
-  });
-
-  return { labels, datasets };
-}
-
-async function renderizarGrafico() {
-  try {
-    const response = await fetch('/dashboard/barras');
-
-    if (!response.ok) throw new Error('Falha na requisição');
-
-    const rows = await response.json();
-    const { labels, datasets } = buildChartData(rows);
-
-    new Chart(document.getElementById('chart'), {
-      type: 'bar',
-      data: { labels, datasets },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        scales: {
-          x: { stacked: true },
-          y: {
-            stacked: true,
-            max: 100,
-            ticks: { callback: v => v + '%' }
-          }
-        },
-        plugins: {
-          tooltip: {
-            callbacks: {
-              label: ctx => `${ctx.dataset.label}: ${ctx.parsed.y}%`
-            }
-          }
-        }
-      }
-    });
-
-  } catch (error) {
-    console.error('Erro ao carregar gráfico:', error);
-    document.getElementById('chart').insertAdjacentHTML(
-      'afterend',
-      '<p style="color:red">Erro ao carregar dados.</p>'
-    );
-  }
-}
-
-
-document.addEventListener('DOMContentLoaded', renderizarGrafico);
-*/
-    // charts questoes
-
-
-    // chart ia Chart_general_ia
-
-    const data_ia = {
-        labels: ["Pro AI", "Anti AI", "1indiferente"],
-        datasets: [
-            {
-                label: 'Dataset 1',
-                data: [3, 8, 2],
-                borderColor: ['rgb(255, 99, 132)',
-                    'rgb(255, 159, 64)',
-                    'rgb(255, 205, 86)'],
-                backgroundColor: ['rgb(255, 99, 132)',
-                    'rgb(255, 159, 64)',
-                    'rgb(255, 205, 86)'],
-            },
-
-        ]
-    };
-
-    const config_ia = {
-        type: 'bar',
-        data: data_ia,
-        options: {
-            responsive: true,
-            plugins: {
-                legend: {
-                    position: 'top',
-                },
-                title: {
-                    display: true,
-                    text: 'Chart.js Bar Chart'
-                }
-            }
-        },
-    };
-
-    const myChart_ia = new Chart(
-        document.getElementById('Chart_general_ia'), config_ia
-    );
 
 </script>
 
