@@ -26,25 +26,35 @@
     <div class="inter titulo_dash">Resultados</div>
     <div class="area_grafs">
 
-        <div class="container_graf_individual" >
+        <div class="container_graf_individual">
             <div class="titulo_graf_individual inter">Seu nível é...</div>
             <div class="categoria_individual inter" style="color: green;">Iniciante</div>
             <div class="descricao_individual inter">acertou 2/10, estude mais!</div>
         </div>
-        <div class="container_graf_individual" >
-            <div style="display: flex; justify-content: center; font-size: 2rem; font-weight: 500; padding-bottom: 50px;" class="inter" >Questões mais erradas</div>
+        <div class="container_graf_individual">
+            <div style="display: flex; justify-content: center; font-size: 2rem; font-weight: 500; padding-bottom: 50px;"
+                class="inter">Questões mais erradas</div>
             <div style="display: flex; gap: 30px; justify-content: space-around; align-content: center;">
-                <div class="inter container_kpi_questoes" style="display: flex; flex-direction: column; font-size: 3.5rem; font-weight: 500;">
+                <div class="inter container_kpi_questoes"
+                    style="display: flex; flex-direction: column; font-size: 3.5rem; font-weight: 500;">
                     Q4
-                    <div style="display: flex; justify-content: center; font-size: 1.5rem; font-weight: 500; color: red; ">55%</div>
+                    <div
+                        style="display: flex; justify-content: center; font-size: 1.5rem; font-weight: 500; color: red; ">
+                        55%</div>
                 </div>
-                <div class="inter container_kpi_questoes" style="display: flex; flex-direction: column; font-size: 3.5rem; font-weight: 500;">
+                <div class="inter container_kpi_questoes"
+                    style="display: flex; flex-direction: column; font-size: 3.5rem; font-weight: 500;">
                     Q7
-                    <div style="display: flex; justify-content: center; font-size: 1.5rem; font-weight: 500; color: orange; background-color: rgb(248, 244, 238);">25%</div>
+                    <div
+                        style="display: flex; justify-content: center; font-size: 1.5rem; font-weight: 500; color: orange; background-color: rgb(248, 244, 238);">
+                        25%</div>
                 </div>
-                <div class="inter container_kpi_questoes" style="display: flex; flex-direction: column; font-size: 3.5rem; font-weight: 500;">
+                <div class="inter container_kpi_questoes"
+                    style="display: flex; flex-direction: column; font-size: 3.5rem; font-weight: 500;">
                     Q3
-                    <div style="display: flex; justify-content: center; font-size: 1.5rem; font-weight: 500; color: rgb(188, 182, 0); background-color: rgb(248, 244, 238);">19%</div>
+                    <div
+                        style="display: flex; justify-content: center; font-size: 1.5rem; font-weight: 500; color: rgb(188, 182, 0); background-color: rgb(248, 244, 238);">
+                        19%</div>
                 </div>
             </div>
         </div>
@@ -79,8 +89,8 @@
                         <div class="dado_kpi_user inter">38%</div>
                         <div class="dado_mini inter">560 usuários</div>
                     </div>
-                    
-                    <div class="container_kpi_user_mini" >
+
+                    <div class="container_kpi_user_mini">
                         <div class="titulo_kpi_mini inter" style="color: orange;">Avançado (8-9)</div>
                         <div class="dado_kpi_user inter">14%</div>
                         <div class="dado_mini inter">240 usuários</div>
@@ -109,10 +119,23 @@
 
 <script>
 
-    function logout(){
+    function logout() {
         sessionStorage.clear();
         window.location.href = `login.html`
     }
+
+    // 1. Somatória total de respostas/votos para esta questão específica
+    // (Exemplo fictício baseado nos seus números: 51 + 29 + 20 + 20 = 120 votos no total)
+    let total_questoes1 = 51 + 29 + 20 + 20
+
+    // 2. Correção da fórmula: (votos_da_alternativa * 100) / total_geral
+    let por_altA = (51 * 100) / total_questoes1   // ~42.5%
+    let por_altB = (29 * 100) / total_questoes1   // ~24.1%
+    let por_altC = (20 * 100) / total_questoes1   // ~16.7%
+    let por_altD = (20 * 100) / total_questoes1   // ~16.7%
+
+    // Agora a soma de porcentagem1 vai dar exatamente 100%
+    let porcentagem1 = por_altA + por_altB + por_altC + por_altD
 
 
     new Chart(document.getElementById('chart'), {
@@ -120,10 +143,12 @@
         data: {
             labels: ['Q1', 'Q2', 'Q3', 'Q4', 'Q5', 'Q6', 'Q7', 'Q8', 'Q9', 'Q10'],
             datasets: [
-                { label: 'Opção A', data: [51, 30, 82], backgroundColor: '#534AB7' },
-                { label: 'Opção B', data: [29, 45, 10], backgroundColor: '#1D9E75' },
-                { label: 'Opção C', data: [20, 25, 8], backgroundColor: '#EF9F27' },
-                { label: 'Opção D', data: [20, 25, 8], backgroundColor: '#2F7F27' }
+                // O Chart.js espera um array de dados para cada questão (Q1 até Q10).
+                // Para testar a Q1, colocamos as variáveis na primeira posição de cada array:
+                { label: 'Opção A', data: [por_altA, 0, 0, 0, 0, 0, 0, 0, 0, 0], backgroundColor: '#534AB7' },
+                { label: 'Opção B', data: [por_altB, 0, 0, 0, 0, 0, 0, 0, 0, 0], backgroundColor: '#1D9E75' },
+                { label: 'Opção C', data: [por_altC, 0, 0, 0, 0, 0, 0, 0, 0, 0], backgroundColor: '#EF9F27' },
+                { label: 'Opção D', data: [por_altD, 0, 0, 0, 0, 0, 0, 0, 0, 0], backgroundColor: '#2F7F27' }
             ]
         },
         options: {
@@ -131,7 +156,15 @@
             responsive: true,
             maintainAspectRatio: false,
             scales: {
-                x: { stacked: true },
+                x: {
+                    stacked: true,
+                    max: 100, // Força o limite do eixo X a ser 100%
+                    ticks: {
+                    callback: function(value) {
+                        return value + '%'; // Pega o número atual e junta com o símbolo de %
+                    }
+                }
+                },
                 y: { stacked: true }
             }
         }
