@@ -41,8 +41,12 @@
 
                 <input type="password" id="confirmacao_senha_input" placeholder="Confirme sua senha">
 
+                <div id="cardErro">
+                    <span id="mensagem_erro"></span>
+                </div>
 
-                <button type="button" class="botao" onclick="cadastrar()">
+
+                <button type="button" class="botao" onclick="validar_cadastro()">
                     <p>Criar conta</p>
                 </button>
 
@@ -56,7 +60,53 @@
 </body>
 
 <script>
-    let listaEmpresasCadastradas = [];
+    //let listaEmpresasCadastradas = [];
+
+        function validar_cadastro(){
+
+        var emailVar = email_input.value;
+        var senhaConfVar = confirmacao_senha_input.value
+        var senhaVar = senha_input.value;
+
+            var regrasLogin = [
+        {
+            condicao: emailVar === "",
+            mensagem: "O campo de e-mail não pode estar vazio."
+        },
+        {
+            condicao: !emailVar.includes("@") || !emailVar.includes("."),
+            mensagem: "Informe um e-mail válido (ex: nome@email.com)."
+        },
+        {
+            condicao: senhaVar === "" || senhaConfVar === "",
+            mensagem: "Os campos de senhas não podem estar vazio."
+        },
+        {
+            condicao: senhaVar.length < 6,
+            mensagem: "A senha deve ter no mínimo 6 caracteres."
+        },
+        {
+            condicao: senhaVar != senhaConfVar,
+            mensagem: "As senhas devem estar iguais"
+        }
+    ];
+
+       
+
+        for (var i = 0; i < regrasLogin.length; i++) {
+            mensagem_erro.innerHTML = regrasLogin[i].mensagem;
+            if (regrasLogin[i].condicao) {
+                cardErro.style.display = "block";
+                
+                console.log(regrasLogin[i]);
+                //cardErro.innerHTML = `${regrasLogin[i].mensagem}`
+                
+                
+                return false; // Para na primeira regra quebrada
+            }
+        }
+        cadastrar();
+    }
 
     function cadastrar() {
         // aguardar();

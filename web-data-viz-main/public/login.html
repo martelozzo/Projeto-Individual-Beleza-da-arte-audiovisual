@@ -38,7 +38,7 @@
 
                 <span id="mensagem_erro"></span>
 
-                <button type="button" class="botao" onclick="entrar()">
+                <button type="button" class="botao" onclick="validar_login()">
                     <p>Entrar</p>
                 </button>
 
@@ -51,8 +51,8 @@
             <div id="div_aguardar" class="loading-div">
                     <img src="./assets/circle-loading.gif" id="loading-gif">
                 </div>
-            <div class="card_erro" id="cardErro">
-                <span id="mensagem_erro"></span>
+            <div class="card_erro" id="cardErro" style="color: red;">
+                <span id="mensagem_erro" style="color: red;"></span>
             </div>
         </div>
                         
@@ -64,6 +64,49 @@
 
 <script>
 
+
+ 
+
+    function validar_login(){
+
+        var emailVar = email_input.value;
+        var senhaVar = senha_input.value;
+
+            var regrasLogin = [
+        {
+            condicao: emailVar === "",
+            mensagem: "O campo de e-mail não pode estar vazio."
+        },
+        {
+            condicao: !emailVar.includes("@") || !emailVar.includes("."),
+            mensagem: "Informe um e-mail válido (ex: nome@email.com)."
+        },
+        {
+            condicao: senhaVar === "",
+            mensagem: "O campo de senha não pode estar vazio."
+        },
+        {
+            condicao: senhaVar.length < 6,
+            mensagem: "A senha deve ter no mínimo 6 caracteres."
+        }
+    ];
+
+       
+
+        for (var i = 0; i < regrasLogin.length; i++) {
+            mensagem_erro.innerHTML = regrasLogin[i].mensagem;
+            if (regrasLogin[i].condicao) {
+                cardErro.style.display = "block";
+                
+                console.log(regrasLogin[i]);
+                //cardErro.innerHTML = `${regrasLogin[i].mensagem}`
+                
+                
+                return false; // Para na primeira regra quebrada
+            }
+        }
+        entrar();
+    }
 
     function entrar() {
         aguardar();
