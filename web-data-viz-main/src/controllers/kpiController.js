@@ -44,6 +44,15 @@ function mais_erradas(req, res) {
     })
 }
 
+function mais_erradas_porcentagem(req, res) {
+    kpiModel.mais_erradas_porcentagem().then(function(resultado){
+        // precisamos informar que o resultado voltará para o front-end como uma resposta em json
+        res.status(200).json(resultado);
+    }).catch(function(erro){
+        res.status(500).json(erro.sqlMessage);
+    })
+}
+
 // function cadastrar(req, res) {
 //     var nome = req.body.nome;
 
@@ -62,6 +71,7 @@ module.exports = {
     listar,
     media,
     acertos,
-    mais_erradas
+    mais_erradas,
+    mais_erradas_porcentagem
     //cadastrar
 }

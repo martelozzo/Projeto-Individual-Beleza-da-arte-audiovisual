@@ -11,7 +11,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
         rel="stylesheet">
-        <script src="sessao.js"></script>
+        <script src="./js/sessao.js"></script> 
 </head>
 
 <body>
@@ -42,6 +42,7 @@
                 <input type="password" id="confirmacao_senha_input" placeholder="Confirme sua senha">
 
                 <div id="cardErro">
+                    
                     <span id="mensagem_erro"></span>
                 </div>
 
@@ -57,6 +58,7 @@
                 <a href="login.html">Entrar</a>
             </p>
         </div>
+        <div id="div_aguardar"></div>
 </body>
 
 <script>
@@ -94,9 +96,10 @@
        
 
         for (var i = 0; i < regrasLogin.length; i++) {
-            mensagem_erro.innerHTML = regrasLogin[i].mensagem;
+            
             if (regrasLogin[i].condicao) {
                 cardErro.style.display = "block";
+                mensagem_erro.innerHTML = regrasLogin[i].mensagem;
                 
                 console.log(regrasLogin[i]);
                 //cardErro.innerHTML = `${regrasLogin[i].mensagem}`

@@ -51,6 +51,23 @@ function mais_erradas() {
     return database.executar(instrucao);
 }
 
+function mais_erradas_porcentagem() {
+    var instrucao = `
+        SELECT q.id AS questao_id,
+        COUNT(CASE WHEN a.correta = FALSE THEN 1 END) AS total_erros,
+        COUNT(r.id)                                   AS total_respostas
+        FROM respostas r
+        JOIN alternativas a ON a.id = r.alternativa_id
+        JOIN questoes q    ON q.id  = r.questao_id
+        GROUP BY q.id
+        ORDER BY total_erros DESC
+        LIMIT 3;
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
+
 
 // function cadastrar(nome) {
 //     var instrucao = `
@@ -65,5 +82,6 @@ module.exports = {
     listar,
     media,
     acertos,
-    mais_erradas
+    mais_erradas,
+    mais_erradas_porcentagem
 };

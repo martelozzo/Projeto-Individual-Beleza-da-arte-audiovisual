@@ -37,7 +37,10 @@
                 <input type="password" id="senha_input" placeholder="Senha">
 
                 <span id="mensagem_erro"></span>
-
+                
+                <div id="div_aguardar" class="loading-div">
+                        <img src="./assets/circle-loading.gif" id="loading-gif">
+                    </div>
                 <button type="button" class="botao" onclick="validar_login()">
                     <p>Entrar</p>
                 </button>
@@ -48,9 +51,6 @@
                 Não possui conta?
                 <a href="cadastro.html">Criar conta</a>
             </p>
-            <div id="div_aguardar" class="loading-div">
-                    <img src="./assets/circle-loading.gif" id="loading-gif">
-                </div>
             <div class="card_erro" id="cardErro" style="color: red;">
                 <span id="mensagem_erro" style="color: red;"></span>
             </div>
@@ -94,8 +94,9 @@
        
 
         for (var i = 0; i < regrasLogin.length; i++) {
-            mensagem_erro.innerHTML = regrasLogin[i].mensagem;
+            
             if (regrasLogin[i].condicao) {
+                mensagem_erro.innerHTML = regrasLogin[i].mensagem;
                 cardErro.style.display = "block";
                 
                 console.log(regrasLogin[i]);
@@ -142,6 +143,11 @@
 
             if (resposta.ok) {
                 console.log(resposta);
+
+                cardErro.style.display = "block";
+
+                    mensagem_erro.innerHTML =
+                        "Login realizado com sucesso! Redirecionando para o Quiz...";
 
                 resposta.json().then(json => {
                     console.log(json);
