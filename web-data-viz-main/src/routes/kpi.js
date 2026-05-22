@@ -33,5 +33,10 @@ router.get("/mais_erradas_porcentagem", function (req, res) {
     kpiController.mais_erradas_porcentagem(req, res);
 });
 
+router.get("/categorias_geral", function (req, res) {
+    // função a ser chamada quando acessar /carros/listar
+    kpiController.categorias_geral(req, res);
+});
+
 
 module.exports = router;

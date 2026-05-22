@@ -67,6 +67,25 @@ function mais_erradas_porcentagem() {
     return database.executar(instrucao);
 }
 
+function categorias_geral() {
+    var instrucao = `
+        SELECT
+    SUM(CASE WHEN acertos BETWEEN 0 AND 4 THEN 1 ELSE 0 END) AS iniciante,
+    SUM(CASE WHEN acertos BETWEEN 5 AND 7 THEN 1 ELSE 0 END) AS intermediario,
+    SUM(CASE WHEN acertos BETWEEN 8 AND 9 THEN 1 ELSE 0 END) AS avancado,
+    SUM(CASE WHEN acertos = 10             THEN 1 ELSE 0 END) AS expert
+        FROM (
+    SELECT r.usuario_id, COUNT(r.id) AS acertos
+    FROM respostas r
+    JOIN alternativas a ON a.id = r.alternativa_id
+    WHERE a.correta = TRUE
+    GROUP BY r.usuario_id
+        ) AS notas;
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
 
 
 // function cadastrar(nome) {
@@ -83,5 +102,6 @@ module.exports = {
     media,
     acertos,
     mais_erradas,
-    mais_erradas_porcentagem
+    mais_erradas_porcentagem,
+    categorias_geral
 };

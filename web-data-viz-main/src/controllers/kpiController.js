@@ -53,6 +53,15 @@ function mais_erradas_porcentagem(req, res) {
     })
 }
 
+function categorias_geral(req, res) {
+    kpiModel.categorias_geral().then(function(resultado){
+        // precisamos informar que o resultado voltará para o front-end como uma resposta em json
+        res.status(200).json(resultado);
+    }).catch(function(erro){
+        res.status(500).json(erro.sqlMessage);
+    })
+}
+
 // function cadastrar(req, res) {
 //     var nome = req.body.nome;
 
@@ -72,6 +81,7 @@ module.exports = {
     media,
     acertos,
     mais_erradas,
-    mais_erradas_porcentagem
+    mais_erradas_porcentagem,
+    categorias_geral
     //cadastrar
 }

@@ -86,26 +86,26 @@
                 <div class="container_kpi_user_large">
                     <div class="container_kpi_user_mini">
                         <div class="titulo_kpi_mini inter" style="color: green;">Iniciante (0-4)</div>
-                        <div class="dado_kpi_user inter">38%</div>
-                        <div class="dado_mini inter">560 usuários</div>
+                        <div class="dado_kpi_user inter" id="exib_iniciantes"></div>
+                        <div class="dado_mini inter" id="num_iniciantes"></div>
                     </div>
 
                     <div class="container_kpi_user_mini">
                         <div class="titulo_kpi_mini inter" style="color: orange;">Avançado (8-9)</div>
-                        <div class="dado_kpi_user inter">14%</div>
-                        <div class="dado_mini inter">240 usuários</div>
+                        <div class="dado_kpi_user inter" id="exib_avancados"></div>
+                        <div class="dado_mini inter" id="num_avancados"></div>
                     </div>
 
                     <div class="container_kpi_user_mini" style="margin-left: 0px;">
                         <div class="titulo_kpi_mini inter" style="color: rgb(188, 182, 0);">Intermediário (5-7)</div>
-                        <div class="dado_kpi_user inter">41%</div>
-                        <div class="dado_mini inter">950 usuários</div>
+                        <div class="dado_kpi_user inter" id="exib_intermediarios"></div>
+                        <div class="dado_mini inter" id="num_intermediarios"></div>
                     </div>
 
                     <div class="container_kpi_user_mini" style="margin-left: 0px;">
                         <div class="titulo_kpi_mini inter" style="color: red;">Expert (10)</div>
-                        <div class="dado_kpi_user inter">7%</div>
-                        <div class="dado_mini inter">87 usuários</div>
+                        <div class="dado_kpi_user inter" id="exib_experts"></div>
+                        <div class="dado_mini inter" id="num_experts"></div>
                     </div>
                 </div>
 
@@ -321,6 +321,36 @@
         top2_port.innerHTML = `${por2}% de erro`;
         top3_port.innerHTML = `${por3}% de erro`;
 
+    }
+
+    async function categorias_geral () {
+
+        let retornoKPI = await fetch('/kpi/categorias_geral');
+        let dados = await retornoKPI.json();
+        
+        console.log(dados[0].avancados);
+        
+        const iniciantes = Number(dados[0].iniciante) ;
+        const intermediarios = Number(dados[0].intermediario) ;
+        const avancados = Number(dados[0].avancado) ;
+        const experts = Number(dados[0].expert) ;
+        const total = iniciantes + intermediarios + avancados + experts
+
+        const por_iniciantes = Math.round(iniciantes * 100 / total);
+        const por_intermediarios = Math.round(intermediarios * 100 / total);
+        const por_avancados = Math.round(avancados * 100 / total);
+        const por_experts = Math.round(experts * 100 / total);
+
+        exib_iniciantes.innerHTML = `${por_iniciantes}%`;
+        exib_intermediarios.innerHTML = `${por_intermediarios}%`;
+        exib_avancados.innerHTML = `${por_avancados}%`;
+        exib_experts.innerHTML = `${por_experts}%`;
+
+        num_iniciantes.innerHTML = `${iniciantes} usuários`;
+        num_intermediarios.innerHTML = `${intermediarios} usuários`;
+        num_avancados.innerHTML = `${avancados} usuários`;
+        num_experts.innerHTML = `${experts} usuários`;
+        
 
     }
 
@@ -335,6 +365,8 @@
     setInterval(buscarMaisErradas, 10000);
     buscarMaisErradasPorcentagem();
     setInterval(buscarMaisErradasPorcentagem, 10000);
+    categorias_geral();
+    setInterval(categorias_geral, 10000);
 
 
 </script>
