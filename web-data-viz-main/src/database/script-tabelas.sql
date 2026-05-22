@@ -34,3 +34,5 @@ CREATE TABLE respostas (
   FOREIGN KEY (questao_id)     REFERENCES questoes(id),
   FOREIGN KEY (alternativa_id) REFERENCES alternativas(id)
 );
+
+

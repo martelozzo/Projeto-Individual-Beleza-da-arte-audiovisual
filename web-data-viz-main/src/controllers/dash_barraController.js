@@ -1,7 +1,7 @@
 var dash_barraModel = require("../models/dash_barraModel");
 
 function listar(req, res) {
-    carroModel.listar().then(function(resultado){
+    dash_barraModel.listar().then(function(resultado){
         // precisamos informar que o resultado voltará para o front-end como uma resposta em json
         res.status(200).json(resultado);
     }).catch(function(erro){

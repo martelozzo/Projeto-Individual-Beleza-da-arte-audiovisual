@@ -23,6 +23,7 @@ var avisosRouter = require("./src/routes/avisos");
 //var empresasRouter = require("./src/routes/empresas");
 var quizRouter = require("./src/routes/quiz");
 var dash_barraRouter = require("./src/routes/dash_barra");
+var kpiRouter = require("./src/routes/kpi");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -38,6 +39,7 @@ app.use("/avisos", avisosRouter);
 //app.use("/empresas", empresasRouter);
 app.use("/quiz", quizRouter);
 app.use("/dash_barra", dash_barraRouter);
+app.use("/kpi", kpiRouter);
 
 
 app.listen(PORTA_APP, function () {

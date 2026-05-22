@@ -1,7 +1,7 @@
 var express = require("express");
 var router = express.Router();
 
-var carroController = require("../controllers/dash_barraController");
+var dash_barraController = require("../controllers/dash_barraController");
 
 /*router.post("/cadastrar", function (req, res) {
     // função a ser chamada quando acessar /carros/cadastrar
@@ -10,7 +10,7 @@ var carroController = require("../controllers/dash_barraController");
 
 router.get("/listar", function (req, res) {
     // função a ser chamada quando acessar /carros/listar
-    carroController.listar(req, res);
+    dash_barraController.listar(req, res);
 });
 
 module.exports = router;
