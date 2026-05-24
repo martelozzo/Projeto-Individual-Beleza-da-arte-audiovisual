@@ -27,12 +27,12 @@
             <p>INICIAR QUIZ</p>
         </button>
 
-        <div id="pontuacao" class="flex-colunar width-fit-content border-primary" style="margin: 2rem;">
+        <div id="pontuacao" class="flex-colunar width-fit-content border-primary" style="margin: 1rem;">
             <div id="pontuacaoDuranteJogo" class="flex-colunar padding-8">
                 <span class="width-fit-content">Quantidade de acertos: <span id="spanCertas"><br></span></span>
                 <span class="width-fit-content">Quantidade de erros: <span id="spanErradas"><br></span></span>
             </div>
-            <div id="pontuacaoFinalJogo" class="flex-colunar padding-8" style="margin: 2rem;">
+            <div id="pontuacaoFinalJogo" class="flex-colunar padding-8" style="margin: 1rem;">
                 <span id="pontuacaoFinal" class="width-fit-content">Pontuação Final:
                     <span id="spanPontuacaoFinal">***</span>
                 </span>
@@ -41,17 +41,18 @@
         </div>
 
         <div id="jogo" class="inter"
-            style="position: relative; padding-bottom: 11rem; display: flex; flex-direction: column; margin: 3rem; gap: 2rem;">
+            style="position: relative; display: flex; flex-direction: column; margin: 0rem; gap: 2rem;">
 
-            <div id="infoQuestao" class="padding-8" style="display: flex; align-self: flex-start; padding-left: 3rem;">
+            <div id="infoQuestao" class="padding-8" style="display: flex; align-self: flex-start; padding-left: 0rem;">
                 <span>Questão atual: <span id="spanNumeroDaQuestaoAtual"></span> de <span id="qtdQuestoes"></span>
                     questões.</span>
             </div>
 
             <div id="perguntaDaQuestaoAtual" class="padding-8">
-                <span id="spanQuestaoExibida" class="text-bold"></span>
+                <span id="spanQuestaoExibida" class="inter"></span>
             </div>
 
+        <div class="container_questao">
             <div id="infoAlternativas" class="padding-8">
                 <span><em>Escolha uma opção dentre as abaixo:</em></span>
             </div>
@@ -79,6 +80,7 @@
                 <span id="msgEnvio" class="width-fit-content" style="margin-top: 0.5rem;"></span>
 
             </div>
+        </div>
 
             <div id="botoes" class="flex-colunar padding-8" style="display: flex; flex-direction: row; flex-wrap: wrap; gap: 0.5rem; justify-content: center; align-items: center;
             position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); width: max-content;">
@@ -156,7 +158,7 @@
 
         {
             id: 4,
-            pergunta: "Qual destes fundamentos da arte se demonstra o mais essencial como base?",
+            pergunta: "Quais destes fundamentos da arte se demonstra o mais essencial como base?",
             imagem: "",
             alternativaA: "Formas",        idA: 13,
             alternativaB: "Luz e sombra",  idB: 14,
@@ -326,6 +328,7 @@
     function avancar() {
         btnProx.disabled = true
         btnSubmeter.disabled = false
+        
 
         desmarcarRadioButtons()
 
