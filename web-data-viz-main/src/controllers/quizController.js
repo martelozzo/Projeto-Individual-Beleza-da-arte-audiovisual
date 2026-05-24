@@ -49,11 +49,11 @@ function validar(req, res) {
     }
 
     quizModel.validar(usuarioId).then(function(resultado) {
-        // Se o resultado contiver linhas, significa que o usuário já respondeu
+        // Se o resultado contiver linhas, significa que o usuário já respondeu e no front manda para a rota de fazer update
         if (resultado.length > 0) {
             res.status(200).send("Usuário já respondeu anteriormente.");
         } else {
-            // Se estiver vazio, retornamos um status de erro (ex: 404) para o front-end cair no 'else'
+            // Caso contrario, retorna um status de erro para o front-end cair no 'else' e mandar pra rota que faz insert
             res.status(404).send("Usuário ainda não respondeu este quiz.");
         }
     }).catch(function(erro) {
