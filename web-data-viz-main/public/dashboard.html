@@ -149,41 +149,34 @@
         return parseInt(id)
     }
 
+       async function buscarDados() {
+    const resposta = await fetch('/dash_barra/listar');
+    const dados = await resposta.json();
 
-    function buscarDados() {
-        fetch('/dash_barra/listar')
-            .then(function (resposta) { return resposta.json(); })
-            .then(function (dados) {
+    const labels = [], dataA = [], dataB = [], dataC = [], dataD = [];
 
-                var labels = [], dataA = [], dataB = [], dataC = [], dataD = [];
+    for (let i = 0; i < dados.length; i += 4) {
+        const a = Number(dados[i].total);
+        const b = Number(dados[i + 1].total);
+        const c = Number(dados[i + 2].total);
+        const d = Number(dados[i + 3].total);
+        const total = a + b + c + d;
 
-                for (var i = 0; i < dados.length; i += 4) {
-                    var a = Number(dados[i].total);
-                    var b = Number(dados[i + 1].total);
-                    var c = Number(dados[i + 2].total);
-                    var d = Number(dados[i + 3].total);
-                    var total = a + b + c + d;
-
-                    labels.push('Q' + dados[i].questao_id);
-
-                    dataA.push(total == 0 ? 0 : Math.round(a * 100 / total * 10) / 10);
-                    dataB.push(total == 0 ? 0 : Math.round(b * 100 / total * 10) / 10);
-                    dataC.push(total == 0 ? 0 : Math.round(c * 100 / total * 10) / 10);
-                    dataD.push(total == 0 ? 0 : Math.round(d * 100 / total * 10) / 10);
-                }
-
-                meuChart.data.labels = labels;
-                meuChart.data.datasets[0].data = dataA;
-                meuChart.data.datasets[1].data = dataB;
-                meuChart.data.datasets[2].data = dataC;
-                meuChart.data.datasets[3].data = dataD;
-                meuChart.update();
-
-            })
-            .catch(function (erro) {
-                console.error('Erro ao buscar dados do dashboard:', erro);
-            });
+        labels.push('Q' + dados[i].questao_id);
+        dataA.push(total == 0 ? 0 : Math.round(a * 100 / total * 10) / 10);
+        dataB.push(total == 0 ? 0 : Math.round(b * 100 / total * 10) / 10);
+        dataC.push(total == 0 ? 0 : Math.round(c * 100 / total * 10) / 10);
+        dataD.push(total == 0 ? 0 : Math.round(d * 100 / total * 10) / 10);
     }
+
+    meuChart.data.labels = labels;
+    meuChart.data.datasets[0].data = dataA;
+    meuChart.data.datasets[1].data = dataB;
+    meuChart.data.datasets[2].data = dataC;
+    meuChart.data.datasets[3].data = dataD;
+    meuChart.update();
+}
+
 
     var meuChart = new Chart(document.getElementById('chart'), {
         type: 'bar',
@@ -246,6 +239,9 @@
         
         
     }
+
+ 
+
 
     async function buscarAcertosUser() {
 
