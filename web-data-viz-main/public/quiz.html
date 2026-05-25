@@ -16,16 +16,25 @@
             beleza e
             a importância da
             arte audiovisual</div>
-            <div class="user inter"><p id="pfp" class="pfp_text"></p></div>
+        <div class="user inter">
+            <p id="pfp" class="pfp_text"></p>
+        </div>
         <div class="inter"><button class="sair" onclick=logout()>
                 <p>Sair</p>
             </button></div>
     </header>
     <div id="pontuacaoEJogo" style="display: flex; height: 100%; width: 100%; gap: 2rem; flex-wrap: wrap;">
-        <button id="btnIniciarQuiz" onclick="iniciarQuiz()" class="botao"
-            style="display:flex; justify-content: center; align-items: center; height: 4rem; width: 8rem; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
-            <p>INICIAR QUIZ</p>
-        </button>
+        <div style="display:flex; justify-content: center; align-items: center; height: fit-content; width: fit-content; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+            <button id="btnIniciarQuiz" onclick="iniciarQuiz()" class="botao"
+                style="display:flex; justify-content: center; align-items: center; height: 4rem; width: 8rem;">
+                <p>INICIAR QUIZ</p>
+            </button>
+            <button id="btnIrPraDash" onclick="irParaDash()" class="botao"
+                style="display:flex; justify-content: center; align-items: center; height: 4rem; width: 8rem;">
+                <p>IR PARA DASHBOARD</p>
+            </button>
+        </div>
+
 
         <div id="pontuacao" class="flex-colunar width-fit-content border-primary" style="margin: 1rem;">
             <div id="pontuacaoDuranteJogo" class="flex-colunar padding-8">
@@ -52,35 +61,35 @@
                 <span id="spanQuestaoExibida" class="inter"></span>
             </div>
 
-        <div class="container_questao">
-            <div id="infoAlternativas" class="padding-8">
-                <span><em>Escolha uma opção dentre as abaixo:</em></span>
+            <div class="container_questao">
+                <div id="infoAlternativas" class="padding-8">
+                    <span><em>Escolha uma opção dentre as abaixo:</em></span>
+                </div>
+
+                <div id="imagemQuestao" style="display: flex; justify-content: center; align-items: center;"></div>
+
+                <div id="opcoes" class="flex-colunar padding-8"
+                    style="padding-top: 1rem; display: flex; flex-direction: column; gap: 1rem;">
+                    <span>
+                        <input type="radio" id="primeiraOpcao" name="option" class="radio" value="alternativaA" />
+                        <label for="primeiraOpcao" class="option" id="labelOpcaoUm"></label>
+                    </span>
+                    <span>
+                        <input type="radio" id="segundaOpcao" name="option" class="radio" value="alternativaB" />
+                        <label for="segundaOpcao" class="option" id="labelOpcaoDois"></label>
+                    </span>
+                    <span>
+                        <input type="radio" id="terceiraOpcao" name="option" class="radio" value="alternativaC" />
+                        <label for="terceiraOpcao" class="option" id="labelOpcaoTres"></label>
+                    </span>
+                    <span>
+                        <input type="radio" id="quartaOpcao" name="option" class="radio" value="alternativaD" />
+                        <label for="quartaOpcao" class="option" id="labelOpcaoQuatro"></label>
+                    </span>
+                    <span id="msgEnvio" class="width-fit-content" style="margin-top: 0.5rem;"></span>
+
+                </div>
             </div>
-
-            <div id="imagemQuestao" style="display: flex; justify-content: center; align-items: center;"></div>
-
-            <div id="opcoes" class="flex-colunar padding-8"
-                style="padding-top: 1rem; display: flex; flex-direction: column; gap: 1rem;">
-                <span>
-                    <input type="radio" id="primeiraOpcao" name="option" class="radio" value="alternativaA" />
-                    <label for="primeiraOpcao" class="option" id="labelOpcaoUm"></label>
-                </span>
-                <span>
-                    <input type="radio" id="segundaOpcao" name="option" class="radio" value="alternativaB" />
-                    <label for="segundaOpcao" class="option" id="labelOpcaoDois"></label>
-                </span>
-                <span>
-                    <input type="radio" id="terceiraOpcao" name="option" class="radio" value="alternativaC" />
-                    <label for="terceiraOpcao" class="option" id="labelOpcaoTres"></label>
-                </span>
-                <span>
-                    <input type="radio" id="quartaOpcao" name="option" class="radio" value="alternativaD" />
-                    <label for="quartaOpcao" class="option" id="labelOpcaoQuatro"></label>
-                </span>
-                <span id="msgEnvio" class="width-fit-content" style="margin-top: 0.5rem;"></span>
-
-            </div>
-        </div>
 
             <div id="botoes" class="flex-colunar padding-8" style="display: flex; flex-direction: row; flex-wrap: wrap; gap: 0.5rem; justify-content: center; align-items: center;
             position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); width: max-content;">
@@ -95,7 +104,8 @@
                     style="height: 3rem; width: 9rem;" disabled>
                     <p>Tentar novamente</p>
                 </button>
-                <button onclick="irParaDash()" id="btnDash" class="botao" disabled style="display: none; height: 3rem; width: 9rem;">
+                <button onclick="irParaDash()" id="btnDash" class="botao" disabled
+                    style="display: none; height: 3rem; width: 9rem;">
                     <p>Resultados</p>
                 </button>
             </div>
@@ -116,7 +126,7 @@
     pfp.innerHTML = `${letra_pfp}`
 
 
-    function logout(){
+    function logout() {
         sessionStorage.clear();
         window.location.href = `login.html`
     }
@@ -127,10 +137,10 @@
             id: 1,
             pergunta: "Quantos fundamentos tem a Arte?",
             imagem: "https://ricardoguchi.com.br/wp-content/uploads/2021/03/fundamentos-do-desenho.jpg",
-            alternativaA: "10",    idA: 1,
-            alternativaB: "12",    idB: 2,
-            alternativaC: "7",     idC: 3,
-            alternativaD: "5",     idD: 4,
+            alternativaA: "10", idA: 1,
+            alternativaB: "12", idB: 2,
+            alternativaC: "7", idC: 3,
+            alternativaD: "5", idD: 4,
             alternativaCorreta: "alternativaC"
         },
 
@@ -138,10 +148,10 @@
             id: 2,
             pergunta: "Quantos princípios tem a Animação?",
             imagem: "",
-            alternativaA: "15",    idA: 5,
-            alternativaB: "7",     idB: 6,
-            alternativaC: "10",    idC: 7,
-            alternativaD: "12",    idD: 8,
+            alternativaA: "15", idA: 5,
+            alternativaB: "7", idB: 6,
+            alternativaC: "10", idC: 7,
+            alternativaD: "12", idD: 8,
             alternativaCorreta: "alternativaD"
         },
 
@@ -149,10 +159,10 @@
             id: 3,
             pergunta: "Na arte 'A última ceia' de Leonardo qual conceito revolucionário na época foi utilizado?",
             imagem: "https://static.todamateria.com.br/upload/ul/ti/ultima_ceia_da_vinci_1_694x250_c.jpg",
-            alternativaA: "Luz em Sombra",    idA: 9,
-            alternativaB: "Perspectiva",      idB: 10,
-            alternativaC: "Religião",         idC: 11,
-            alternativaD: "Anatomia",         idD: 12,
+            alternativaA: "Luz em Sombra", idA: 9,
+            alternativaB: "Perspectiva", idB: 10,
+            alternativaC: "Religião", idC: 11,
+            alternativaD: "Anatomia", idD: 12,
             alternativaCorreta: "alternativaB"
         },
 
@@ -160,10 +170,10 @@
             id: 4,
             pergunta: "Quais destes fundamentos da arte se demonstra o mais essencial como base?",
             imagem: "",
-            alternativaA: "Formas",        idA: 13,
-            alternativaB: "Luz e sombra",  idB: 14,
-            alternativaC: "Cor",           idC: 15,
-            alternativaD: "Anatomia",      idD: 16,
+            alternativaA: "Formas", idA: 13,
+            alternativaB: "Luz e sombra", idB: 14,
+            alternativaC: "Cor", idC: 15,
+            alternativaD: "Anatomia", idD: 16,
             alternativaCorreta: "alternativaA"
         },
 
@@ -171,10 +181,10 @@
             id: 5,
             pergunta: "Quais conceitos geralmente mais ajudam na 'Fluidez' de uma animação?",
             imagem: "",
-            alternativaA: "Timing e Distorção",      idA: 17,
-            alternativaB: "Mais frames por segundo",  idB: 18,
-            alternativaC: "Mesclar com 3D",          idC: 19,
-            alternativaD: "Anatomia",                idD: 20,
+            alternativaA: "Timing e Distorção", idA: 17,
+            alternativaB: "Mais frames por segundo", idB: 18,
+            alternativaC: "Mesclar com 3D", idC: 19,
+            alternativaD: "Anatomia", idD: 20,
             alternativaCorreta: "alternativaA"
         },
 
@@ -182,10 +192,10 @@
             id: 6,
             pergunta: "Por qual destes motivos a arte teve grande influência no avanço científico que contribuiu a salvar vidas?",
             imagem: "",
-            alternativaA: "Primeira inspeção anatômica de um corpo falecido foi feito por um artista, tendo uso medicinal",  idA: 21,
-            alternativaB: "A procura de mais tintas se foi criado remédios",                                                 idB: 22,
-            alternativaC: "A pintura de obras religiosas que eram usadas como terapia visual para acalmar os enfermos",     idC: 23,
-            alternativaD: "A invenção de novos pincéis que foram adaptados como ferramentas cirúrgicas",                    idD: 24,
+            alternativaA: "Primeira inspeção anatômica de um corpo falecido foi feito por um artista, tendo uso medicinal", idA: 21,
+            alternativaB: "A procura de mais tintas se foi criado remédios", idB: 22,
+            alternativaC: "A pintura de obras religiosas que eram usadas como terapia visual para acalmar os enfermos", idC: 23,
+            alternativaD: "A invenção de novos pincéis que foram adaptados como ferramentas cirúrgicas", idD: 24,
             alternativaCorreta: "alternativaA"
         },
 
@@ -193,10 +203,10 @@
             id: 7,
             pergunta: "Qual o nome da técnica utilizada na imagem acima?",
             imagem: "",
-            alternativaA: "Oclusão de Ambiente",        idA: 25,
-            alternativaB: "Sombra de Contato",          idB: 26,
-            alternativaC: "Disperção Subsuperficial",   idC: 27,
-            alternativaD: "Reflexão de Matiz",          idD: 28,
+            alternativaA: "Oclusão de Ambiente", idA: 25,
+            alternativaB: "Sombra de Contato", idB: 26,
+            alternativaC: "Disperção Subsuperficial", idC: 27,
+            alternativaD: "Reflexão de Matiz", idD: 28,
             alternativaCorreta: "alternativaC"
         },
 
@@ -204,10 +214,10 @@
             id: 8,
             pergunta: "Qual estilo de animação é conhecido por usar poucos frames, porém com distorções exagerada?",
             imagem: "",
-            alternativaA: "Itano Circus",   idA: 29,
-            alternativaB: "Obari Style",    idB: 30,
-            alternativaC: "Norio Style",    idC: 31,
-            alternativaD: "Kanada Style",   idD: 32,
+            alternativaA: "Itano Circus", idA: 29,
+            alternativaB: "Obari Style", idB: 30,
+            alternativaC: "Norio Style", idC: 31,
+            alternativaD: "Kanada Style", idD: 32,
             alternativaCorreta: "alternativaD"
         },
 
@@ -215,10 +225,10 @@
             id: 9,
             pergunta: "Quem foi o criador da famosa técnica chamada 'Impact Frames' ou Frames de Impacto?",
             imagem: "",
-            alternativaA: "Yutaka Nakamura",   idA: 33,
-            alternativaB: "Vincent Chansard",  idB: 34,
-            alternativaC: "James Baxter",      idC: 35,
-            alternativaD: "Weiling Zhang",     idD: 36,
+            alternativaA: "Yutaka Nakamura", idA: 33,
+            alternativaB: "Vincent Chansard", idB: 34,
+            alternativaC: "James Baxter", idC: 35,
+            alternativaD: "Weiling Zhang", idD: 36,
             alternativaCorreta: "alternativaA"
         },
 
@@ -226,10 +236,10 @@
             id: 10,
             pergunta: "Quais das ilustrações estão anatomicamente correta?",
             imagem: "",
-            alternativaA: "Primeira",   idA: 37,
-            alternativaB: "Segunda",    idB: 38,
-            alternativaC: "Terceira",   idC: 39,
-            alternativaD: "Quarta",     idD: 40,
+            alternativaA: "Primeira", idA: 37,
+            alternativaB: "Segunda", idB: 38,
+            alternativaC: "Terceira", idC: 39,
+            alternativaD: "Quarta", idD: 40,
             alternativaCorreta: "alternativaD"
         }
 
@@ -255,6 +265,9 @@
     function onloadEsconder() {
         document.getElementById('pontuacao').style.display = "none"
         document.getElementById('jogo').style.display = "none"
+        document.getElementById('btnIrPraDash').style.display = "none"
+
+
     }
 
     function iniciarQuiz() {
@@ -278,9 +291,9 @@
 
         document.getElementById("spanNumeroDaQuestaoAtual").innerHTML = Number(index) + 1
         document.getElementById("spanQuestaoExibida").innerHTML = questaoAtual.pergunta;
-        document.getElementById("labelOpcaoUm").innerHTML    = questaoAtual.alternativaA;
-        document.getElementById("labelOpcaoDois").innerHTML  = questaoAtual.alternativaB;
-        document.getElementById("labelOpcaoTres").innerHTML  = questaoAtual.alternativaC;
+        document.getElementById("labelOpcaoUm").innerHTML = questaoAtual.alternativaA;
+        document.getElementById("labelOpcaoDois").innerHTML = questaoAtual.alternativaB;
+        document.getElementById("labelOpcaoTres").innerHTML = questaoAtual.alternativaC;
         document.getElementById("labelOpcaoQuatro").innerHTML = questaoAtual.alternativaD;
 
         const imgContainer = document.getElementById("imagemQuestao")
@@ -328,7 +341,7 @@
     function avancar() {
         btnProx.disabled = true
         btnSubmeter.disabled = false
-        
+
 
         desmarcarRadioButtons()
 
@@ -387,7 +400,7 @@
         }
         const opcaoMarcada = [...options].find(o => o.checked)
         respostasParaEnviar.push({
-            questao_id:     questaoAtual.id,
+            questao_id: questaoAtual.id,
             alternativa_id: idMap[opcaoMarcada.value]
         })
     }
@@ -425,7 +438,7 @@
             classComCoresParaMensagemFinal = "text-success-with-bg"
         }
 
-        textoParaMensagemFinal += "<br> Você acertou " + Math.round((porcentagemFinalDeAcertos)*100) + "% das questões."
+        textoParaMensagemFinal += "<br> Você acertou " + Math.round((porcentagemFinalDeAcertos) * 100) + "% das questões."
 
         document.getElementById('msgFinal').innerHTML = textoParaMensagemFinal
         document.getElementById('msgFinal').classList.add(classComCoresParaMensagemFinal)
@@ -442,11 +455,11 @@
 
 
     async function validarBanco() {
-        
+
         const usuarioId = getUsuarioId()
 
         if (!usuarioId) {
-            msgEnvio.innerHTML   = "Faça login para salvar seus resultados."
+            msgEnvio.innerHTML = "Faça login para salvar seus resultados."
             msgEnvio.style.color = "orange"
             return
         }
@@ -464,44 +477,44 @@
             })
 
             if (response.ok) {
-                msgEnvio.innerHTML   = "Ja respondido antes, indo atualizar respostas"
+                msgEnvio.innerHTML = "Ja respondido antes, indo atualizar respostas"
                 msgEnvio.style.color = "green"
                 console.log(`passei no repsondido antes`);
-                
+
                 atualizarRespostarParaBanco()
             } else {
                 const errorText = await response.text()
                 console.error('Erro do servidor:', errorText)
                 //msgEnvio.innerHTML   = `Erro ${response.status}: ${response.statusText}`
-                msgEnvio.innerHTML   = `indo enviar respostas para banco...`
+                msgEnvio.innerHTML = `indo enviar respostas para banco...`
                 msgEnvio.style.color = "green"
                 console.log(`passei no enviar novo`);
                 enviarRespostasParaBancoDeDados()
             }
         } catch (error) {
-            console.error('Falha na requisição:',   error)
-            msgEnvio.innerHTML   = "Não foi possível conectar ao servidor."
+            console.error('Falha na requisição:', error)
+            msgEnvio.innerHTML = "Não foi possível conectar ao servidor."
             msgEnvio.style.color = "red"
         }
     }
 
     async function atualizarRespostarParaBanco() {
-        const msgEnvio  = document.getElementById('msgEnvio')
+        const msgEnvio = document.getElementById('msgEnvio')
         const usuarioId = getUsuarioId()
 
         if (!usuarioId) {
-            msgEnvio.innerHTML   = "Faça login para salvar seus resultados."
+            msgEnvio.innerHTML = "Faça login para salvar seus resultados."
             msgEnvio.style.color = "orange"
             return
         }
 
-        
+
 
         msgEnvio.innerHTML = "Salvando resultados..."
 
         const payload = {
             usuario_id: usuarioId,
-            respostas:  respostasParaEnviar
+            respostas: respostasParaEnviar
         }
 
         try {
@@ -512,19 +525,19 @@
             })
 
             if (response.ok) {
-                msgEnvio.innerHTML   = "Resultados salvos com sucesso!"
+                msgEnvio.innerHTML = "Resultados salvos com sucesso!"
                 msgEnvio.style.color = "green"
                 document.getElementById('btnDash').style.display = "flex"
                 btnDash.disabled = false;
             } else {
                 const errorText = await response.text()
                 console.error('Erro do servidor:', errorText)
-                msgEnvio.innerHTML   = `Erro ${response.status}: ${response.statusText}`
+                msgEnvio.innerHTML = `Erro ${response.status}: ${response.statusText}`
                 msgEnvio.style.color = "red"
             }
         } catch (error) {
             console.error('Falha na requisição:', error)
-            msgEnvio.innerHTML   = "Não foi possível conectar ao servidor."
+            msgEnvio.innerHTML = "Não foi possível conectar ao servidor."
             msgEnvio.style.color = "red"
         }
     }
@@ -534,22 +547,22 @@
     }
 
     async function enviarRespostasParaBancoDeDados() {
-        const msgEnvio  = document.getElementById('msgEnvio')
+        const msgEnvio = document.getElementById('msgEnvio')
         const usuarioId = getUsuarioId()
 
         if (!usuarioId) {
-            msgEnvio.innerHTML   = "Faça login para salvar seus resultados."
+            msgEnvio.innerHTML = "Faça login para salvar seus resultados."
             msgEnvio.style.color = "orange"
             return
         }
 
-        
+
 
         msgEnvio.innerHTML = "Salvando resultados..."
 
         const payload = {
             usuario_id: usuarioId,
-            respostas:  respostasParaEnviar
+            respostas: respostasParaEnviar
         }
 
         try {
@@ -560,19 +573,19 @@
             })
 
             if (response.ok) {
-                msgEnvio.innerHTML   = "Resultados salvos com sucesso!"
+                msgEnvio.innerHTML = "Resultados salvos com sucesso!"
                 msgEnvio.style.color = "green"
                 document.getElementById('btnDash').style.display = "flex"
                 btnDash.disabled = false;
             } else {
                 const errorText = await response.text()
                 console.error('Erro do servidor:', errorText)
-                msgEnvio.innerHTML   = `Erro ${response.status}: ${response.statusText}`
+                msgEnvio.innerHTML = `Erro ${response.status}: ${response.statusText}`
                 msgEnvio.style.color = "red"
             }
         } catch (error) {
             console.error('Falha na requisição:', error)
-            msgEnvio.innerHTML   = "Não foi possível conectar ao servidor."
+            msgEnvio.innerHTML = "Não foi possível conectar ao servidor."
             msgEnvio.style.color = "red"
         }
     }
@@ -580,5 +593,63 @@
     function irParaDash() {
         window.location.href = `dashboard.html`
     }
+
+    async function validarUser() {
+        console.log("rodei validar user");
+
+        const usuarioId = getUsuarioId()
+
+        if (!usuarioId) {
+            msgEnvio.innerHTML = "Faça login para salvar seus resultados."
+            msgEnvio.style.color = "orange"
+            return
+        }
+
+        const payload = {
+            usuario_id: usuarioId,
+            //respostas:  respostasParaEnviar
+        }
+
+        try {
+            const response = await fetch('/quiz/validar', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            })
+
+            if (response.ok) {
+                //msgEnvio.innerHTML = "Ja respondido antes, liberando botao dash"
+                //msgEnvio.style.color = "green"
+                console.log(`passei no repsondido antes`);
+
+                liberarBotaoDash()
+            } else {
+                const errorText = await response.text()
+                console.error('Erro do servidor:', errorText)
+                //msgEnvio.innerHTML   = `Erro ${response.status}: ${response.statusText}`
+                //msgEnvio.innerHTML = ``
+                //msgEnvio.style.color = "green"
+                console.log(`passei no novo`);
+
+            }
+        } catch (error) {
+            console.error('Falha na requisição:', error)
+            msgEnvio.innerHTML = "Não foi possível conectar ao servidor."
+            msgEnvio.style.color = "red"
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        // Coloque a sua função aqui
+        validarUser();
+    });
+
+    function liberarBotaoDash() {
+
+        let botao = document.getElementById("btnIrPraDash")
+        botao.style.display = "flex"
+
+    }
+
 
 </script>
