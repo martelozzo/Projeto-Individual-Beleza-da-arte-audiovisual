@@ -202,7 +202,7 @@
         {
             id: 7,
             pergunta: "Qual o nome da técnica utilizada na imagem acima?",
-            imagem: "",
+            imagem: "./assets/imgs/surfacescattering.png",
             alternativaA: "Oclusão de Ambiente", idA: 25,
             alternativaB: "Sombra de Contato", idB: 26,
             alternativaC: "Disperção Subsuperficial", idC: 27,
@@ -234,8 +234,8 @@
 
         {
             id: 10,
-            pergunta: "Quais das ilustrações estão anatomicamente correta?",
-            imagem: "",
+            pergunta: "Qual destas ilustrações está mais anatomicamente correta?",
+            imagem: "./assets/imgs/anatomiaquiz.png",
             alternativaA: "Primeira", idA: 37,
             alternativaB: "Segunda", idB: 38,
             alternativaC: "Terceira", idC: 39,
@@ -483,7 +483,8 @@
                 console.log(`passei no repsondido antes`);
 
                 atualizarRespostarParaBanco()
-            } else {
+            }
+             else {
                 const errorText = await response.text()
                 console.error('Erro do servidor:', errorText)
                 //msgEnvio.innerHTML   = `Erro ${response.status}: ${response.statusText}`
