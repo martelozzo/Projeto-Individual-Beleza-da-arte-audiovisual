@@ -157,7 +157,7 @@
         {
             id: 2,
             pergunta: "Quantos princípios tem a Animação?",
-            imagem: "./assets/imgs/gengabirdy.jpg",
+            imagem: "./assets/imgs/birdygenga1.gif",
             alternativaA: "15", idA: 5,
             alternativaB: "7", idB: 6,
             alternativaC: "10", idC: 7,
@@ -168,7 +168,7 @@
         {
             id: 3,
             pergunta: "Na arte 'A última ceia' de Leonardo qual conceito revolucionário na época foi utilizado?",
-            imagem: "https://static.todamateria.com.br/upload/ul/ti/ultima_ceia_da_vinci_1_694x250_c.jpg",
+            imagem: "./assets/imgs/ultimaceia.webp",
             alternativaA: "Luz em Sombra", idA: 9,
             alternativaB: "Perspectiva", idB: 10,
             alternativaC: "Religião", idC: 11,
@@ -309,8 +309,8 @@
 
         const imgContainer = document.getElementById("imagemQuestao")
         if (questaoAtual.imagem) {
-            imgContainer.innerHTML = `<img src="${questaoAtual.imagem}" alt="Imagem da questão" style="max-height:300px">`
-            imgContainer.style.display = "block"
+            imgContainer.innerHTML = `<img src="${questaoAtual.imagem}" alt="Imagem da questão">`
+            imgContainer.style.display = "flex"
         } else {
             imgContainer.innerHTML = ""
             imgContainer.style.display = "none"

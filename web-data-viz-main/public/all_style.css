@@ -269,8 +269,8 @@
         justify-content: center;
         flex-direction: column;
         background-color: rgb(220, 214, 206);
-        height: 50vh;
-        width: 90vh;
+        height: 60vh;
+        width: 100vh;
         gap: 15px;
         border-radius: 15px;
         text-align: center;
@@ -391,8 +391,8 @@
         font-family: "Inter", sans-serif;
         font-size: 0.9rem;
         margin: 1.5rem 0 0 1rem;
-        position: sticky;
-        top: 1rem;
+        position: static;
+        
         justify-content: space-around;
     }
 
@@ -472,11 +472,10 @@
 
     #imagemQuestao img {
         max-width: 100%;
-        max-height: 60vh;
+        max-height: 45vh;
         border-radius: 10px;
         object-fit: contain;
-        display: flex;
-        justify-content: center;
+        
     }
 
     #opcoes {
