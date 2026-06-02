@@ -23,8 +23,9 @@
                 <p>Sair</p>
             </button></div>
     </header>
-    <div id="pontuacaoEJogo" style="display: flex; height: 100%; width: 100%; gap: 2rem; flex-wrap: wrap;">
-        <div style="display:flex; justify-content: center; align-items: center; height: fit-content; width: fit-content; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+    <div id="pontuacaoEJogo">
+        <div
+            style="display:flex; justify-content: center; align-items: center; height: fit-content; width: fit-content; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
             <button id="btnIniciarQuiz" onclick="iniciarQuiz()" class="botao"
                 style="display:flex; justify-content: center; align-items: center; height: 4rem; width: 8rem; margin: 2rem;">
                 <p>INICIAR QUIZ</p>
@@ -36,7 +37,7 @@
         </div>
 
 
-        <div id="pontuacao" class="flex-colunar width-fit-content border-primary" style="margin: 1rem;">
+        <div id="pontuacao" class="flex-colunar width-fit-content border-primary">
             <div id="pontuacaoDuranteJogo" class="flex-colunar padding-8">
                 <span class="width-fit-content">Quantidade de acertos: <span id="spanCertas"><br></span></span>
                 <span class="width-fit-content">Quantidade de erros: <span id="spanErradas"><br></span></span>
@@ -47,72 +48,81 @@
                 </span>
                 <span id="msgFinal" class="width-fit-content">***</span>
             </div>
-        </div>
-
-        <div id="jogo" class="inter"
-            style="position: relative; display: flex; flex-direction: column; margin: 0rem; gap: 2rem;">
-
-            <div id="infoQuestao" class="padding-8" style="display: flex; align-self: flex-start; padding-left: 0rem;">
+            <div id="infoQuestao" class="padding-8" >
                 <span>Questão atual: <span id="spanNumeroDaQuestaoAtual"></span> de <span id="qtdQuestoes"></span>
                     questões.</span>
             </div>
+        </div>
+
+        <div id="jogo" class="inter"
+           >
+
+            
 
             <div id="perguntaDaQuestaoAtual" class="padding-8">
                 <span id="spanQuestaoExibida" class="inter"></span>
             </div>
+
+            <div id="imagemQuestao" ></div>
 
             <div class="container_questao">
                 <div id="infoAlternativas" class="padding-8">
                     <span><em>Escolha uma opção dentre as abaixo:</em></span>
                 </div>
 
-                <div id="imagemQuestao" style="display: flex; justify-content: center; align-items: center;"></div>
+                
 
                 <div id="opcoes" class="flex-colunar padding-8"
                     style="padding-top: 1rem; display: flex; flex-direction: column; gap: 1rem;">
-                    <span>
+
+                    <label id="labelOpcaoUm" class="option"
+                        style="cursor: pointer; display: flex; align-items: center; gap: 0.5rem;">
                         <input type="radio" id="primeiraOpcao" name="option" class="radio" value="alternativaA" />
-                        <label for="primeiraOpcao" class="option" id="labelOpcaoUm"></label>
-                    </span>
-                    <span>
+                        <span></span>
+                    </label>
+
+                    <label id="labelOpcaoDois" class="option"
+                        style="cursor: pointer; display: flex; align-items: center; gap: 0.5rem;">
                         <input type="radio" id="segundaOpcao" name="option" class="radio" value="alternativaB" />
-                        <label for="segundaOpcao" class="option" id="labelOpcaoDois"></label>
-                    </span>
-                    <span>
+                        <span></span>
+                    </label>
+
+                    <label id="labelOpcaoTres" class="option"
+                        style="cursor: pointer; display: flex; align-items: center; gap: 0.5rem;">
                         <input type="radio" id="terceiraOpcao" name="option" class="radio" value="alternativaC" />
-                        <label for="terceiraOpcao" class="option" id="labelOpcaoTres"></label>
-                    </span>
-                    <span>
+                        <span></span>
+                    </label>
+
+                    <label id="labelOpcaoQuatro" class="option"
+                        style="cursor: pointer; display: flex; align-items: center; gap: 0.5rem;">
                         <input type="radio" id="quartaOpcao" name="option" class="radio" value="alternativaD" />
-                        <label for="quartaOpcao" class="option" id="labelOpcaoQuatro"></label>
-                    </span>
+                        <span></span>
+                    </label>
+
                     <span id="msgEnvio" class="width-fit-content" style="margin-top: 0.5rem;"></span>
-
                 </div>
+
+                
+                
             </div>
-
-            <div id="botoes" class="flex-colunar padding-8" style="display: flex; flex-direction: row; flex-wrap: wrap; gap: 0.5rem; justify-content: center; align-items: center;
-            position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); width: max-content;">
-                <button onclick="submeter()" id="btnSubmeter" class="botao" style="height: 3rem; width: 9rem;">
-                    <p>Submeter resposta</p>
-                </button>
-                <button onclick="avancar()" id="btnProx" disabled class="botao" style="height: 3rem; width: 9rem;">
-                    <p>Avançar para próxima questão</p>
-                </button>
-                <!-- <button onclick="finalizar()" id="btnConcluir" disabled>Finalizar Quiz</button> -->
-                <button onclick="tentarNovamente()" id="btnTentarNovamente" class="botao"
-                    style="height: 3rem; width: 9rem;" disabled>
-                    <p>Tentar novamente</p>
-                </button>
-                <button onclick="irParaDash()" id="btnDash" class="botao" disabled
-                    style="display: none; height: 3rem; width: 9rem;">
-                    <p>Resultados</p>
-                </button>
-            </div>
-
-
+                <div id="botoes">
+                    <button onclick="submeter()" id="btnSubmeter" class="botao" style="height: 3rem; width: 9rem;">
+                        <p>Submeter resposta</p>
+                    </button>
+                    <button onclick="avancar()" id="btnProx" disabled class="botao" style="height: 3rem; width: 9rem;">
+                        <p>Avançar para próxima questão</p>
+                    </button>
+                    <!-- <button onclick="finalizar()" id="btnConcluir" disabled>Finalizar Quiz</button> -->
+                    <button onclick="tentarNovamente()" id="btnTentarNovamente" class="botao"
+                        style="height: 3rem; width: 9rem;" disabled>
+                        <p>Tentar novamente</p>
+                    </button>
+                    <button onclick="irParaDash()" id="btnDash" class="botao" disabled
+                        style="display: none; height: 3rem; width: 9rem;">
+                        <p>Resultados</p>
+                    </button>
+                </div>
         </div>
-    </div>
 </body>
 
 </html>
@@ -136,7 +146,7 @@
         {
             id: 1,
             pergunta: "Quantos fundamentos tem a Arte?",
-            imagem: "https://ricardoguchi.com.br/wp-content/uploads/2021/03/fundamentos-do-desenho.jpg",
+            imagem: "./assets/imgs/fundamentosquiz1.jpg",
             alternativaA: "10", idA: 1,
             alternativaB: "12", idB: 2,
             alternativaC: "7", idC: 3,
@@ -147,7 +157,7 @@
         {
             id: 2,
             pergunta: "Quantos princípios tem a Animação?",
-            imagem: "",
+            imagem: "./assets/imgs/gengabirdy.jpg",
             alternativaA: "15", idA: 5,
             alternativaB: "7", idB: 6,
             alternativaC: "10", idC: 7,
@@ -169,7 +179,7 @@
         {
             id: 4,
             pergunta: "Quais destes fundamentos da arte se demonstra o mais essencial como base?",
-            imagem: "",
+            imagem: "./assets/imgs/fundamentosquiz.jpg",
             alternativaA: "Formas", idA: 13,
             alternativaB: "Luz e sombra", idB: 14,
             alternativaC: "Cor", idC: 15,
@@ -180,7 +190,7 @@
         {
             id: 5,
             pergunta: "Quais conceitos geralmente mais ajudam na 'Fluidez' de uma animação?",
-            imagem: "",
+            imagem: "./assets/imgs/fluidez.gif",
             alternativaA: "Timing e Distorção", idA: 17,
             alternativaB: "Mais frames por segundo", idB: 18,
             alternativaC: "Mesclar com 3D", idC: 19,
@@ -191,7 +201,7 @@
         {
             id: 6,
             pergunta: "Por qual destes motivos a arte teve grande influência no avanço científico que contribuiu a salvar vidas?",
-            imagem: "",
+            imagem: "./assets/imgs/medicina.webp",
             alternativaA: "Primeira inspeção anatômica de um corpo falecido foi feito por um artista, tendo uso medicinal", idA: 21,
             alternativaB: "A procura de mais tintas se foi criado remédios", idB: 22,
             alternativaC: "A pintura de obras religiosas que eram usadas como terapia visual para acalmar os enfermos", idC: 23,
@@ -201,7 +211,7 @@
 
         {
             id: 7,
-            pergunta: "Qual o nome da técnica utilizada na imagem acima?",
+            pergunta: "Qual o nome da técnica utilizada na imagem abaixo?",
             imagem: "./assets/imgs/surfacescattering.png",
             alternativaA: "Oclusão de Ambiente", idA: 25,
             alternativaB: "Sombra de Contato", idB: 26,
@@ -224,7 +234,7 @@
         {
             id: 9,
             pergunta: "Quem foi o criador da famosa técnica chamada 'Impact Frames' ou Frames de Impacto?",
-            imagem: "",
+            imagem: "./assets/imgs/impactframe.gif",
             alternativaA: "Yutaka Nakamura", idA: 33,
             alternativaB: "Vincent Chansard", idB: 34,
             alternativaC: "James Baxter", idC: 35,
@@ -291,11 +301,11 @@
         numeroDaQuestaoAtual = index
 
         document.getElementById("spanNumeroDaQuestaoAtual").innerHTML = Number(index) + 1
-        document.getElementById("spanQuestaoExibida").innerHTML = questaoAtual.pergunta;
-        document.getElementById("labelOpcaoUm").innerHTML = questaoAtual.alternativaA;
-        document.getElementById("labelOpcaoDois").innerHTML = questaoAtual.alternativaB;
-        document.getElementById("labelOpcaoTres").innerHTML = questaoAtual.alternativaC;
-        document.getElementById("labelOpcaoQuatro").innerHTML = questaoAtual.alternativaD;
+        document.getElementById("spanQuestaoExibida").innerHTML = questaoAtual.pergunta; 
+        document.querySelector("#labelOpcaoUm span").textContent = questaoAtual.alternativaA;
+        document.querySelector("#labelOpcaoDois span").textContent = questaoAtual.alternativaB;
+        document.querySelector("#labelOpcaoTres span").textContent = questaoAtual.alternativaC;
+        document.querySelector("#labelOpcaoQuatro span").textContent = questaoAtual.alternativaD;
 
         const imgContainer = document.getElementById("imagemQuestao")
         if (questaoAtual.imagem) {
@@ -484,7 +494,7 @@
 
                 atualizarRespostarParaBanco()
             }
-             else {
+            else {
                 const errorText = await response.text()
                 console.error('Erro do servidor:', errorText)
                 //msgEnvio.innerHTML   = `Erro ${response.status}: ${response.statusText}`
