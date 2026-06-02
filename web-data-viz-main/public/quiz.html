@@ -48,29 +48,28 @@
                 </span>
                 <span id="msgFinal" class="width-fit-content">***</span>
             </div>
-            <div id="infoQuestao" class="padding-8" >
+            <div id="infoQuestao" class="padding-8">
                 <span>Questão atual: <span id="spanNumeroDaQuestaoAtual"></span> de <span id="qtdQuestoes"></span>
                     questões.</span>
             </div>
         </div>
 
-        <div id="jogo" class="inter"
-           >
+        <div id="jogo" class="inter">
 
-            
+
 
             <div id="perguntaDaQuestaoAtual" class="padding-8">
                 <span id="spanQuestaoExibida" class="inter"></span>
             </div>
 
-            <div id="imagemQuestao" ></div>
+            <div id="imagemQuestao"></div>
 
             <div class="container_questao">
                 <div id="infoAlternativas" class="padding-8">
                     <span><em>Escolha uma opção dentre as abaixo:</em></span>
                 </div>
 
-                
+
 
                 <div id="opcoes" class="flex-colunar padding-8"
                     style="padding-top: 1rem; display: flex; flex-direction: column; gap: 1rem;">
@@ -102,26 +101,26 @@
                     <span id="msgEnvio" class="width-fit-content" style="margin-top: 0.5rem;"></span>
                 </div>
 
-                
-                
+
+
             </div>
-                <div id="botoes">
-                    <button onclick="submeter()" id="btnSubmeter" class="botao" style="height: 3rem; width: 9rem;">
-                        <p>Submeter resposta</p>
-                    </button>
-                    <button onclick="avancar()" id="btnProx" disabled class="botao" style="height: 3rem; width: 9rem;">
-                        <p>Avançar para próxima questão</p>
-                    </button>
-                    <!-- <button onclick="finalizar()" id="btnConcluir" disabled>Finalizar Quiz</button> -->
-                    <button onclick="tentarNovamente()" id="btnTentarNovamente" class="botao"
-                        style="height: 3rem; width: 9rem;" disabled>
-                        <p>Tentar novamente</p>
-                    </button>
-                    <button onclick="irParaDash()" id="btnDash" class="botao" disabled
-                        style="display: none; height: 3rem; width: 9rem;">
-                        <p>Resultados</p>
-                    </button>
-                </div>
+            <div id="botoes">
+                <button onclick="submeter()" id="btnSubmeter" class="botao" style="height: 3rem; width: 9rem;">
+                    <p>Submeter resposta</p>
+                </button>
+                <button onclick="avancar()" id="btnProx" disabled class="botao" style="height: 3rem; width: 9rem;">
+                    <p>Avançar para próxima questão</p>
+                </button>
+                <!-- <button onclick="finalizar()" id="btnConcluir" disabled>Finalizar Quiz</button> -->
+                <button onclick="tentarNovamente()" id="btnTentarNovamente" class="botao"
+                    style="height: 3rem; width: 9rem;" disabled>
+                    <p>Tentar novamente</p>
+                </button>
+                <button onclick="irParaDash()" id="btnDash" class="botao" disabled
+                    style="display: none; height: 3rem; width: 9rem; justify-content: center; align-items: center;">
+                    <p>Resultados</p>
+                </button>
+            </div>
         </div>
 </body>
 
@@ -301,7 +300,7 @@
         numeroDaQuestaoAtual = index
 
         document.getElementById("spanNumeroDaQuestaoAtual").innerHTML = Number(index) + 1
-        document.getElementById("spanQuestaoExibida").innerHTML = questaoAtual.pergunta; 
+        document.getElementById("spanQuestaoExibida").innerHTML = questaoAtual.pergunta;
         document.querySelector("#labelOpcaoUm span").textContent = questaoAtual.alternativaA;
         document.querySelector("#labelOpcaoDois span").textContent = questaoAtual.alternativaB;
         document.querySelector("#labelOpcaoTres span").textContent = questaoAtual.alternativaC;
@@ -409,11 +408,12 @@
             alternativaC: questaoAtual.idC,
             alternativaD: questaoAtual.idD
         }
-        const opcaoMarcada = [...options].find(o => o.checked)
+        const elementoMarcado = document.querySelector('input[name="option"]:checked');
+
         respostasParaEnviar.push({
             questao_id: questaoAtual.id,
-            alternativa_id: idMap[opcaoMarcada.value]
-        })
+            alternativa_id: idMap[elementoMarcado.value]
+        });
     }
 
     function limparCoresBackgroundOpcoes() {
